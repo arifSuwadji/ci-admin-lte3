@@ -11,6 +11,12 @@ class AdjiGenerator extends CI_Controller {
         parent::__construct();
     }
 
+    public function help(){
+        $result = "Adji Generator commands\r\n";
+        $result .= "php index.php AdjiGenerator create ControllerName Database_Name \r\n";
+        echo $result. PHP_EOL;
+    }
+
     public function create($controller="", $database=""){
         $allColumns = AllField($database);
         $dataFilter = array();
