@@ -29,6 +29,7 @@
 <?php echo asset_plugin_js('bootstrap-colorpicker/js/bootstrap-colorpicker.min.js')?>
 <?php echo asset_plugin_js('tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')?>
 <?php echo asset_plugin_js('bootstrap-switch/js/bootstrap-switch.min.js')?>
+<?php echo asset_plugin_js('sweetalert2/sweetalert2.min.js')?>
 <?php echo asset_js('adminlte.min.js')?>
 <?php echo asset_js('demo.js')?>
 <?php echo asset_plugin_js('icheck/icheck.min.js')?>
