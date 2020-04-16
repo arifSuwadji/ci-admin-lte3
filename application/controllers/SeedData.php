@@ -2,12 +2,8 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 /**
- * Migration class
- * hanya bisa di akses saat development mode
- * tidak perlu ada perubahan di file ini
  * 
- * php index.php seeder status
- * php index.php seeder version 1
+ * php index.php SeedData help
  * 
  * @author Arif Suwadji <arifsuwadji@gmail.com> 2020/04
  */
