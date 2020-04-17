@@ -901,22 +901,26 @@ let table = $("#tableData").DataTable({
           let aksesEdit = ""; let aksesHapus = "";
           let editData = `editData(${full["'.$dataFilter[0].'"]})`;
           let hapusData = `hapusData(${full["'.$dataFilter[0].'"]})`;
+          let colorButtonEdit = "btn-warning";
+          let colorButtonHapus = "btn-danger";
           if(!full['.$this->buttonEdit.']){
             aksesEdit = "disabled";
             editData = "";
+            colorButtonEdit = "btn-default";
           }
           if(!full['.$this->buttonHapus.']){
             aksesHapus = "disabled";
             hapusData = "";
+            colorButtonHapus = "btn-default";
           }
           return `<div class="btn-group dropleft">
                     <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="fa fa-ellipsis-v"></span></button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                         <a class="dropdown-item" href="javascript:void(0);" onClick="${editData}">
-                            <button class="btn btn-warning btn-block btn-sm text-bold ${aksesEdit}">Edit</button>
+                            <button class="btn ${colorButtonEdit} btn-block btn-sm text-bold ${aksesEdit}">Edit</button>
                         </a>
                         <a class="dropdown-item" href="javascript:void(0);" onClick="${hapusData}">
-                            <button class="btn btn-danger btn-block btn-sm text-bold ${aksesHapus}">Hapus</button>
+                            <button class="btn ${colorButtonHapus} btn-block btn-sm text-bold ${aksesHapus}">Hapus</button>
                         </a>
                     </div>
                   </div>`;
