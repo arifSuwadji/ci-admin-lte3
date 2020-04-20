@@ -2,7 +2,7 @@
 /**
  * controller function
  */
-function admin_controller($controller, $table, $buttonTambah, $buttonTambahAksi, $buttonEdit, $buttonEditAksi, $buttonHapus){
+function admin_foreignkey_controller($controller, $table, $table_foreignkey_one, $table_foreignkey_two, $buttonTambah, $buttonTambahAksi, $buttonEdit, $buttonEditAksi, $buttonHapus){
         $ci =& get_instance();
         
         $allColumns = AllField($table);
@@ -164,6 +164,20 @@ class ".$controller." extends CI_Controller{
                 $data["menuPriviliges"] = $this->ModelHalamanMenu->byPeta($row["pengguna_grup"], "ya");
                 $dataHalaman = $this->ModelHalamanMenu->byPeta($row["pengguna_grup"], "tidak");
                 $data["priviliges"] = button_halaman($dataHalaman);
+        ';
+        if($table_foreignkey_one){
+        $string .='
+                $data["data_'.$table_foreignkey_one.'"] = $this->Model'.$controller.'->data_'.$table_foreignkey_one.'();
+        ';
+        }
+
+        if($table_foreignkey_two){
+        $string .='
+                $data["data_'.$table_foreignkey_two.'"] = $this->Model'.$controller.'->data_'.$table_foreignkey_two.'();
+        ';
+        }
+
+        $string .='
             }
         
             template_admin($page, $data);
@@ -197,7 +211,18 @@ class ".$controller." extends CI_Controller{
         $string .='
                 "'.$fieldName.'" => $list->'.$fieldName.',
         ';
-                }
+            }
+
+            if($table_foreignkey_one){
+        $string .='
+                "nama_'.$table_foreignkey_one.'" => $list->nama_'.$table_foreignkey_one.',
+        ';
+            }
+            if($table_foreignkey_two){
+        $string .='
+                "nama_'.$table_foreignkey_two.'" => $list->nama_'.$table_foreignkey_two.',
+        ';
+            }
         $string .='
                 $idHalamanHapus => $priviligesDelete["pengguna_grup"], $idHalamanEdit => $priviligesDetail["pengguna_grup"]];
                 array_push($results, $dataRow);
@@ -256,6 +281,20 @@ class ".$controller." extends CI_Controller{
             $data["menuPriviliges"] = $this->ModelHalamanMenu->byPeta($row["pengguna_grup"], "ya");
             $dataHalaman = $this->ModelHalamanMenu->byPeta($row["pengguna_grup"], "tidak");
             $data["priviliges"] = button_halaman($dataHalaman);
+        ';
+        if($table_foreignkey_one){
+        $string .='
+            $data["data_'.$table_foreignkey_one.'"] = $this->Model'.$controller.'->data_'.$table_foreignkey_one.'();
+        ';
+        }
+
+        if($table_foreignkey_two){
+        $string .='
+            $data["data_'.$table_foreignkey_two.'"] = $this->Model'.$controller.'->data_'.$table_foreignkey_two.'();
+        ';
+        }
+
+        $string .='
         }
         $dataGrup = $this->ModelPengguna->dataGrup();
         $data["data_grup"] = $dataGrup;
@@ -305,6 +344,20 @@ class ".$controller." extends CI_Controller{
             $data["menuPriviliges"] = $this->ModelHalamanMenu->byPeta($row["pengguna_grup"], "ya");
             $dataHalaman = $this->ModelHalamanMenu->byPeta($row["pengguna_grup"], "tidak");
             $data["priviliges"] = button_halaman($dataHalaman);
+        ';
+        if($table_foreignkey_one){
+        $string .='
+            $data["data_'.$table_foreignkey_one.'"] = $this->Model'.$controller.'->data_'.$table_foreignkey_one.'();
+        ';
+        }
+
+        if($table_foreignkey_two){
+        $string .='
+            $data["data_'.$table_foreignkey_two.'"] = $this->Model'.$controller.'->data_'.$table_foreignkey_two.'();
+        ';
+        }
+
+        $string .='
         }
         $dataGrup = $this->ModelPengguna->dataGrup();
         $data["data_grup"] = $dataGrup;
@@ -369,6 +422,20 @@ class ".$controller." extends CI_Controller{
                 $data["menuPriviliges"] = $this->ModelHalamanMenu->byPeta($row["pengguna_grup"], "ya");
                 $dataHalaman = $this->ModelHalamanMenu->byPeta($row["pengguna_grup"], "tidak");
                 $data["priviliges"] = button_halaman($dataHalaman);
+        ';
+        if($table_foreignkey_one){
+        $string .='
+                $data["data_'.$table_foreignkey_one.'"] = $this->Model'.$controller.'->data_'.$table_foreignkey_one.'();
+        ';
+        }
+
+        if($table_foreignkey_two){
+        $string .='
+                $data["data_'.$table_foreignkey_two.'"] = $this->Model'.$controller.'->data_'.$table_foreignkey_two.'();
+        ';
+        }
+
+        $string .='
                 $dataEdit = $this->Model'.$controller.'->'.$dataFilter[0].'($this->uri->segment(3));
                 $rowEdit = $dataEdit->row_array();
                 if($rowEdit){
@@ -445,6 +512,20 @@ class ".$controller." extends CI_Controller{
             $data["menuPriviliges"] = $this->ModelHalamanMenu->byPeta($row["pengguna_grup"], "ya");
             $dataHalaman = $this->ModelHalamanMenu->byPeta($row["pengguna_grup"], "tidak");
             $data["priviliges"] = button_halaman($dataHalaman);
+        ';
+        if($table_foreignkey_one){
+        $string .='
+            $data["data_'.$table_foreignkey_one.'"] = $this->Model'.$controller.'->data_'.$table_foreignkey_one.'();
+        ';
+        }
+
+        if($table_foreignkey_two){
+        $string .='
+            $data["data_'.$table_foreignkey_two.'"] = $this->Model'.$controller.'->data_'.$table_foreignkey_two.'();
+        ';
+        }
+
+        $string .='
             $dataEdit = $this->Model'.$controller.'->'.$dataFilter[0].'($this->input->post("'.$dataFilter[0].'_edit"));
             $rowEdit = $dataEdit->row_array();
             if($rowEdit){
@@ -529,7 +610,7 @@ class ".$controller." extends CI_Controller{
 /**
  * model generator
  */
-function model_generator($controller, $table){
+function model_foreignkey_generator($controller, $table, $table_foreignkey_one, $table_foreignkey_two){
     $ci =& get_instance();
     
     $allColumns = AllField($table);
@@ -537,12 +618,39 @@ function model_generator($controller, $table){
     foreach($allColumns as $fieldName){
         array_push($dataFilter, $fieldName['column_name']);
     }
+
+    $allColumns_foreignkey_one = AllField($table_foreignkey_one);
+    $dataFilter_foreignkey_one = array();
+    foreach($allColumns_foreignkey_one as $fieldName){
+        array_push($dataFilter_foreignkey_one, $fieldName['column_name']);
+    }
+
+    $allColumns_foreignkey_two = AllField($table_foreignkey_two);
+    $dataFilter_foreignkey_two = array();
+    foreach($allColumns_foreignkey_two as $fieldName){
+        array_push($dataFilter_foreignkey_two, $fieldName['column_name']);
+    }
+
     $string ='<?php
 defined("BASEPATH") OR exit("No direct script access allowed");
 
 class Model'.$controller.' extends CI_model{
     private $table = "'.$table.'";
+    ';
 
+    if($table_foreignkey_one){
+    $string .='
+    private $table_'.$table_foreignkey_one.' = "'.$table_foreignkey_one.'";
+    ';
+    }
+
+    if($table_foreignkey_two){
+    $string .='
+    private $table_'.$table_foreignkey_two.' = "'.$table_foreignkey_two.'";
+    ';
+    }
+
+    $string .='
     public function '.$dataFilter[0].'($'.$dataFilter[0].'){
         return $this->db->get_where($this->table, array("'.$dataFilter[0].'" => $'.$dataFilter[0].'));
     }
@@ -550,21 +658,77 @@ class Model'.$controller.' extends CI_model{
     function hapusData($'.$dataFilter[0].'){
         return $this->db->delete($this->table, array("'.$dataFilter[0].'" => $'.$dataFilter[0].'));
     }
+    
+    ';
 
+    if($table_foreignkey_one){
+    $string .='
+    public function data_'.$table_foreignkey_one.'(){
+        return $this->db->get($this->table_'.$table_foreignkey_one.');
+    }
+    ';
+    }
+
+    if($table_foreignkey_two){
+    $string .='
+    public function data_'.$table_foreignkey_two.'(){
+        return $this->db->get($this->table_'.$table_foreignkey_two.');
+    }
+    ';
+    }
+
+    $string .='
     function count'.$controller.'($value){
         if($value){
-            $this->db->or_like("'.$dataFilter[1].'", $value);
-            $this->db->or_like("'.$dataFilter[2].'", $value);
+            $arrVal = explode(\'_\', $value);
+            $arrSearch = array();
+    ';
+    $i = 0;
+    foreach($dataFilter as $fieldName){
+    $string .='
+            if($arrVal['.$i.']){
+                $arrSearch[\''.$fieldName.'\'] = \'%\'.$arrVal['.$i.'].\'%\';
+            }
+    ';
+        $i++;
+    }
+    $string .='
+            $this->db->where($arrSearch);
         }
+    ';
+    if($table_foreignkey_one){
+    $string .='
+        $this->db->join($this->table_'.$table_foreignkey_one.', "'.$table.'.'.$table_foreignkey_one.' = '.$table_foreignkey_one.'.'.$dataFilter_foreignkey_one[0].'");
+    ';
+    }
+    if($table_foreignkey_two){
+    $string .='
+        $this->db->join($this->table_'.$table_foreignkey_two.', "'.$table.'.'.$table_foreignkey_two.' = '.$table_foreignkey_two.'.'.$dataFilter_foreignkey_two[0].'");
+    ';
+    }
+    $string .='
         $this->db->from($this->table);
         return  $this->db->count_all_results();
     }
 
     function list'.$controller.'($value, $start, $length, $column, $sort){
         if($value){
-            $this->db->or_like("'.$dataFilter[1].'", $value);
-            $this->db->or_like("'.$dataFilter[2].'", $value);
+            $arrVal = explode(\'_\', $value);
+            $arrSearch = array();
+    ';
+    $i = 0;
+    foreach($dataFilter as $fieldName){
+    $string .='
+            if($arrVal['.$i.']){
+                $arrSearch[\''.$fieldName.'\'] = \'%\'.$arrVal['.$i.'].\'%\';
+            }
+    ';
+        $i++;
+    }
+    $string .='
+            $this->db->where($arrSearch);
         }
+
         if($column == 0){
             $this->db->order_by("'.$dataFilter[0].'", $sort);
         }else if($column == 1){
@@ -575,10 +739,34 @@ class Model'.$controller.' extends CI_model{
         
         if($start){
             $this->db->select("*");
+    ';
+    if($table_foreignkey_one){
+    $string .='
+            $this->db->join($this->table_'.$table_foreignkey_one.', "'.$table.'.'.$table_foreignkey_one.' = '.$table_foreignkey_one.'.'.$dataFilter_foreignkey_one[0].'");
+    ';
+    }
+    if($table_foreignkey_two){
+    $string .='
+            $this->db->join($this->table_'.$table_foreignkey_two.', "'.$table.'.'.$table_foreignkey_two.' = '.$table_foreignkey_two.'.'.$dataFilter_foreignkey_two[0].'");
+    ';
+    }
+    $string .='
             $this->db->from($this->table);
             return $this->db->limit($length, $start)->get();
         }else{
             $this->db->select("*");
+    ';
+    if($table_foreignkey_one){
+    $string .='
+            $this->db->join($this->table_'.$table_foreignkey_one.', "'.$table.'.'.$table_foreignkey_one.' = '.$table_foreignkey_one.'.'.$dataFilter_foreignkey_one[0].'");
+    ';
+    }
+    if($table_foreignkey_two){
+    $string .='
+            $this->db->join($this->table_'.$table_foreignkey_two.', "'.$table.'.'.$table_foreignkey_two.' = '.$table_foreignkey_two.'.'.$dataFilter_foreignkey_two[0].'");
+    ';
+    }
+    $string .='
             $this->db->from($this->table);
             return $this->db->limit($length)->get();
         }
@@ -590,7 +778,7 @@ class Model'.$controller.' extends CI_model{
     createFile($string, $path);
 }
 
-function template_index($controller, $table, $buttonTambah, $buttonTambahAksi, $buttonEdit, $buttonEditAksi, $buttonHapus){
+function template_foreignkey_index($controller, $table, $table_foreignkey_one, $table_foreignkey_two, $buttonTambah, $buttonTambahAksi, $buttonEdit, $buttonEditAksi, $buttonHapus){
     $ci =& get_instance();
     
     $allColumns = AllField($table);
@@ -598,6 +786,19 @@ function template_index($controller, $table, $buttonTambah, $buttonTambahAksi, $
     foreach($allColumns as $fieldName){
         array_push($dataFilter, $fieldName['column_name']);
     }
+    
+    $allColumns_foreignkey_one = AllField($table_foreignkey_one);
+    $dataFilter_foreignkey_one = array();
+    foreach($allColumns_foreignkey_one as $fieldName){
+        array_push($dataFilter_foreignkey_one, $fieldName['column_name']);
+    }
+
+    $allColumns_foreignkey_two = AllField($table_foreignkey_two);
+    $dataFilter_foreignkey_two = array();
+    foreach($allColumns_foreignkey_two as $fieldName){
+        array_push($dataFilter_foreignkey_two, $fieldName['column_name']);
+    }
+
     $string ='
 <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -618,6 +819,66 @@ function template_index($controller, $table, $buttonTambah, $buttonTambahAksi, $
     <!-- Main content -->
     <section class="content">
     <div class="container-fluid">
+      <div class="card card-default">
+        <div class="card-header">
+            <h3 class="card-title">Pencarian </h3>
+
+            <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+            <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-remove"></i></button>
+            </div>
+        </div>
+        <div class="card-body">
+        <?php
+            $attributes = array("class" => "form-horizontal", "method" => "GET");
+            echo form_open("", $attributes);
+        ?>
+    ';
+    foreach($dataFilter as $fieldName){
+        $langField = str_replace('_',' ', $fieldName);
+        $langField = ucwords($langField);
+        if($fieldName == $table_foreignkey_one){
+    $string .='
+            <div class="form-group">
+                <label for="'.$fieldName.'">'.$langField.'</label>
+                <select id="'.$fieldName.'" name="'.$fieldName.'" class="form-control select2" data-placeholder="'.$langField.'">
+                <option></option>
+            <?php foreach($data_'.$table_foreignkey_one.'->result() as $'.$table_foreignkey_one.'){ ?>
+                <option value="<?php echo $'.$table_foreignkey_one.'->'.$dataFilter_foreignkey_one[0].' ?>" ><?php echo $'.$table_foreignkey_one.'->'.$dataFilter_foreignkey_one[1].' ?></option>
+            <?php } ?>
+                </select>
+            </div>
+    ';
+        }else if($fieldName == $table_foreignkey_two){
+    $string .='
+            <div class="form-group">
+                <label for="'.$fieldName.'">'.$langField.'</label>
+                <select id="'.$fieldName.'" name="'.$fieldName.'" class="form-control select2" data-placeholder="'.$langField.'">
+                <option></option>
+            <?php foreach($data_'.$table_foreignkey_two.'->result() as $'.$table_foreignkey_two.'){ ?>
+                <option value="<?php echo $'.$table_foreignkey_two.'->'.$dataFilter_foreignkey_two[0].' ?>" ><?php echo $'.$table_foreignkey_two.'->'.$dataFilter_foreignkey_two[1].' ?></option>
+            <?php } ?>
+                </select>
+            </div>
+    ';
+        }else{
+    $string .='
+            <div class="form-group">
+                <label for="'.$fieldName.'">'.$langField.'</label>
+                <input type="text" id="'.$fieldName.'" class="form-control" placeholder="'.$langField.'" name="'.$fieldName.'" value="">
+            </div>
+    ';
+        }
+    }
+    $string .='
+        <?php echo form_close() ?>
+        </div>
+        <div class="card-footer">
+            <div class="col-md-6">
+                <button type="button" class="btn btn-primary" id="cari">Cari</button>
+            </div>
+        </div>
+      </div>
       <div class="row">
         <div class="col-md-12">
             <div class="card">
@@ -664,7 +925,7 @@ function template_index($controller, $table, $buttonTambah, $buttonTambahAksi, $
     createFile($string, $path);
 }
 
-function template_tambah($controller, $table, $buttonTambah, $buttonTambahAksi, $buttonEdit, $buttonEditAksi, $buttonHapus){
+function template_foreignkey_tambah($controller, $table, $table_foreignkey_one, $table_foreignkey_two, $buttonTambah, $buttonTambahAksi, $buttonEdit, $buttonEditAksi, $buttonHapus){
     $ci =& get_instance();
     
     $allColumns = AllField($table);
@@ -672,6 +933,19 @@ function template_tambah($controller, $table, $buttonTambah, $buttonTambahAksi, 
     foreach($allColumns as $fieldName){
         array_push($dataFilter, $fieldName['column_name']);
     }
+
+    $allColumns_foreignkey_one = AllField($table_foreignkey_one);
+    $dataFilter_foreignkey_one = array();
+    foreach($allColumns_foreignkey_one as $fieldName){
+        array_push($dataFilter_foreignkey_one, $fieldName['column_name']);
+    }
+
+    $allColumns_foreignkey_two = AllField($table_foreignkey_two);
+    $dataFilter_foreignkey_two = array();
+    foreach($allColumns_foreignkey_two as $fieldName){
+        array_push($dataFilter_foreignkey_two, $fieldName['column_name']);
+    }
+
     $string ='
 <!-- Content Header (Page header) -->
 <?php $title = explode("(",$menuHalaman->sub_judul_menu); ?>
@@ -722,12 +996,38 @@ function template_tambah($controller, $table, $buttonTambah, $buttonTambahAksi, 
     foreach($dataFilter as $fieldName){
         $langField = str_replace('_',' ', $fieldName);
         $langField = ucwords($langField);
+        if($fieldName == $table_foreignkey_one){
+    $string .='
+        <div class="form-group">
+            <label for="'.$fieldName.'">'.$langField.'</label>
+            <select id="'.$fieldName.'" name="'.$fieldName.'" class="form-control select2" data-placeholder="'.$langField.'">
+            <option></option>
+        <?php foreach($data_'.$table_foreignkey_one.'->result() as $'.$table_foreignkey_one.'){ ?>
+            <option value="<?php echo $'.$table_foreignkey_one.'->'.$dataFilter_foreignkey_one[0].' ?>" <?php echo $'.$table_foreignkey_one.'->'.$dataFilter_foreignkey_one[0].' == $'.$fieldName.' ? "selected" : "" ?>><?php echo $'.$table_foreignkey_one.'->'.$dataFilter_foreignkey_one[1].' ?></option>
+        <?php } ?>
+            </select>
+        </div>
+    ';
+        }else if($fieldName == $table_foreignkey_two){
+    $string .='
+        <div class="form-group">
+            <label for="'.$fieldName.'">'.$langField.'</label>
+            <select id="'.$fieldName.'" name="'.$fieldName.'" class="form-control select2" data-placeholder="'.$langField.'">
+            <option></option>
+        <?php foreach($data_'.$table_foreignkey_two.'->result() as $'.$table_foreignkey_two.'){ ?>
+            <option value="<?php echo $'.$table_foreignkey_two.'->'.$dataFilter_foreignkey_two[0].' ?>" <?php echo $'.$table_foreignkey_two.'->'.$dataFilter_foreignkey_two[0].' == $'.$fieldName.' ? "selected" : "" ?>><?php echo $'.$table_foreignkey_two.'->'.$dataFilter_foreignkey_two[1].' ?></option>
+        <?php } ?>
+            </select>
+        </div>
+    ';
+        }else{
     $string .='
         <div class="form-group">
             <label for="'.$fieldName.'">'.$langField.'</label>
             <input type="text" class="form-control" placeholder="'.$langField.'" name="'.$fieldName.'" value="<?php echo $'.$fieldName.' ?>">
         </div>
     ';
+        }
     }
     $string .='
     </div>
@@ -748,7 +1048,7 @@ function template_tambah($controller, $table, $buttonTambah, $buttonTambahAksi, 
     createFile($string, $path);
 }
 
-function template_edit($controller, $table, $buttonTambah, $buttonTambahAksi, $buttonEdit, $buttonEditAksi, $buttonHapus){
+function template_foreignkey_edit($controller, $table, $table_foreignkey_one, $table_foreignkey_two, $buttonTambah, $buttonTambahAksi, $buttonEdit, $buttonEditAksi, $buttonHapus){
     $ci =& get_instance();
     
     $allColumns = AllField($table);
@@ -756,6 +1056,19 @@ function template_edit($controller, $table, $buttonTambah, $buttonTambahAksi, $b
     foreach($allColumns as $fieldName){
         array_push($dataFilter, $fieldName['column_name']);
     }
+
+    $allColumns_foreignkey_one = AllField($table_foreignkey_one);
+    $dataFilter_foreignkey_one = array();
+    foreach($allColumns_foreignkey_one as $fieldName){
+        array_push($dataFilter_foreignkey_one, $fieldName['column_name']);
+    }
+
+    $allColumns_foreignkey_two = AllField($table_foreignkey_two);
+    $dataFilter_foreignkey_two = array();
+    foreach($allColumns_foreignkey_two as $fieldName){
+        array_push($dataFilter_foreignkey_two, $fieldName['column_name']);
+    }
+
     $string ='
 <!-- Content Header (Page header) -->
 <?php $title = explode("(",$menuHalaman->sub_judul_menu); ?>
@@ -809,12 +1122,38 @@ function template_edit($controller, $table, $buttonTambah, $buttonTambahAksi, $b
         $langField = str_replace('_',' ', $fieldName);
         $langField = ucwords($langField);
         if($i > 1){
+            if($fieldName == $table_foreignkey_one){
+    $string .='
+        <div class="form-group">
+            <label for="'.$fieldName.'">'.$langField.'</label>
+            <select id="'.$fieldName.'" name="'.$fieldName.'" class="form-control select2" data-placeholder="'.$langField.'">
+            <option></option>
+        <?php foreach($data_'.$table_foreignkey_one.'->result() as $opt_'.$table_foreignkey_one.'){ ?>
+            <option value="<?php echo $opt_'.$table_foreignkey_one.'->'.$dataFilter_foreignkey_one[0].' ?>" <?php echo $opt_'.$table_foreignkey_one.'->'.$dataFilter_foreignkey_one[0].' == $'.$fieldName.' ? "selected" : "" ?>><?php echo $opt_'.$table_foreignkey_one.'->'.$dataFilter_foreignkey_one[1].' ?></option>
+        <?php } ?>
+            </select>
+        </div>
+    ';
+            }else if($fieldName == $table_foreignkey_two){
+    $string .='
+        <div class="form-group">
+            <label for="'.$fieldName.'">'.$langField.'</label>
+            <select id="'.$fieldName.'" name="'.$fieldName.'" class="form-control select2" data-placeholder="'.$langField.'">
+            <option></option>
+        <?php foreach($data_'.$table_foreignkey_two.'->result() as $opt_'.$table_foreignkey_two.'){ ?>
+            <option value="<?php echo $opt_'.$table_foreignkey_two.'->'.$dataFilter_foreignkey_two[0].' ?>" <?php echo $opt_'.$table_foreignkey_two.'->'.$dataFilter_foreignkey_two[0].' == $'.$fieldName.' ? "selected" : "" ?>><?php echo $opt_'.$table_foreignkey_two.'->'.$dataFilter_foreignkey_two[1].' ?></option>
+        <?php } ?>
+            </select>
+        </div>
+    ';
+            }else{
     $string .='
         <div class="form-group">
             <label for="'.$fieldName.'">'.$langField.'</label>
             <input type="text" class="form-control" placeholder="'.$langField.'" name="'.$fieldName.'" value="<?php echo $'.$fieldName.' ?>">
         </div>
     ';
+            }
         }
     }
     $string .='
@@ -837,7 +1176,7 @@ function template_edit($controller, $table, $buttonTambah, $buttonTambahAksi, $b
     createFile($string, $path);
 }
 
-function js_generator($controller, $table, $buttonTambah, $buttonTambahAksi, $buttonEdit, $buttonEditAksi, $buttonHapus){
+function js_foreignkey_generator($controller, $table, $buttonTambah, $buttonTambahAksi, $buttonEdit, $buttonEditAksi, $buttonHapus){
     $ci =& get_instance();
     
     $allColumns = AllField($table);
@@ -861,6 +1200,9 @@ let table = $("#tableData").DataTable({
 "processing"  : true,
 "serverSide"  : true,
 "ajax" : ajaxJson,
+"dom" : "<\'row\'<\'col-sm-6\'l>>" +
+"<\'row\'<\'col-sm-12\'tr>>" +
+"<\'row\'<\'col-sm-5\'i><\'col-sm-7\'p>>",
 "columns" : [
     ';
     $string .='
@@ -971,6 +1313,33 @@ function hapusData('.$dataFilter[0].'){
     });
 }
 
+$("#cari").on("click", function(event){
+    event.preventDefault();
+    let searchDataFilter = "";
+    ';
+    $i =0;
+    foreach($dataFilter as $fieldName){
+    $string .='
+    let '.$fieldName.' = $("#'.$fieldName.'").val();
+    ';
+        if($i < count($dataFilter) - 1){
+    $string .='
+    searchDataFilter += `${'.$fieldName.'}_`;
+    ';
+        }else{
+    $string .='
+    searchDataFilter += `${'.$fieldName.'}`;
+    ';
+        }
+        $i++;
+    }
+    foreach($dataFilter as $fieldName){
+    $string .='
+    ';
+    }
+    $string .='
+    table.search(`${searchDataFilter}`).draw();
+});
 function toRp(a,b,c,d,e){e=function(f){return f.split("").reverse().join("")};b=e(parseInt(a,10).toString());for(c=0,d="";c<b.length;c++){d+=b[c];if((c+1)%3===0&&c!==(b.length-1)){d+=",";}}return"\t"+e(d)+""}
 
 // Wrap IIFE around your code
