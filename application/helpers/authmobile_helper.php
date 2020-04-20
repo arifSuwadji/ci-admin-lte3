@@ -56,10 +56,10 @@ function register_mobile($dataDaftar){
         );
     
         $jwt = JWT::encode($payload, $key);
-        return array('status' => TRUE, 'token' => $jwt, 'message' => 'register success');
+        return array('status' => TRUE, 'token' => $jwt, 'pengguna_id' => $idPengguna, 'message' => 'register success');
     } catch (\Throwable $th) {
         //throw $th;
-        return array('status' => TRUE, 'token' => '', 'message' => 'register failed');
+        return array('status' => FALSE, 'token' => '', 'message' => 'register failed');
     }
 }
 
@@ -70,10 +70,14 @@ function session_mobile($token){
     $key = $ci->config->config['encryption_key'];
     try {
         $decoded = JWT::decode($token, $key, array('HS256'));
-        return array('status' => 'TRUE', 'user' => $decoded, 'message' => 'token valid');
+        if($decoded->pengguna_id){
+            return array('status' => TRUE, 'user' => $decoded, 'message' => 'token valid');
+        }else{
+            return array('status' => FALSE, 'user' => $decoded, 'message' => 'token has ended');
+        }
     } catch (\Throwable $th) {
         //throw $th;
-        return array('status' => 'FALSE', 'user' => '', 'message' => $th);
+        return array('status' => FALSE, 'user' => '', 'message' => $th);
     }
 }
 
