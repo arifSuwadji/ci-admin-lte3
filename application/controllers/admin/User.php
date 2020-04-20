@@ -73,7 +73,7 @@ class User extends CI_Controller{
             $privilegesPassword = $dataHalamanPassword->row_array();
             foreach ($listAdmin->result() as $list) {
                 array_push($results, [
-                    'pengguna_id' => $list->pengguna_id, 'nama_pengguna' => $list->nama_pengguna, 'username' => $list->username, 'nama_grup' => $list->nama_grup, $idHalamanHapus => $privilegesDelete['pengguna_grup'], $idHalamanEdit => $privilegesDetail['pengguna_grup'], $idHalamanPassword => $privilegesPassword['pengguna_grup']]);
+                    'pengguna_id' => $list->pengguna_id, 'nama_pengguna' => $list->nama_pengguna, 'username' => $list->username, 'email' => $list->email, 'nama_grup' => $list->nama_grup, $idHalamanHapus => $privilegesDelete['pengguna_grup'], $idHalamanEdit => $privilegesDetail['pengguna_grup'], $idHalamanPassword => $privilegesPassword['pengguna_grup']]);
             }
         }
         $response = array(
@@ -105,7 +105,7 @@ class User extends CI_Controller{
         $data = array();
         $data['filejs'] = '';
         $data['nama_tambah_pengguna'] = '';
-        $data['nama_tambah_user'] = '';
+        $data['nama_tambah_email'] = '';
         $data['select_pengguna_grup'] = '';
         $data['password'] = '';
         $data['konf_password'] = '';
@@ -133,12 +133,12 @@ class User extends CI_Controller{
     }
 
     public function tambahBaru($page = 'user/tambah_user'){
-        $dataValidation = array('nama_pengguna' => 'belum diisi', 'user_pengguna' => 'belum diisi', 'pengguna_grup' => 'belum dipilih', 'password' => 'belum diisi', 'konf_password' => 'belum diisi');
+        $dataValidation = array('nama_pengguna' => 'belum diisi', 'email_pengguna' => 'belum diisi', 'pengguna_grup' => 'belum dipilih', 'password' => 'belum diisi', 'konf_password' => 'belum diisi');
         is_validation($dataValidation);
 
         $data = array();
         $data['nama_tambah_pengguna'] = $this->input->post('nama_pengguna');
-        $data['nama_tambah_user'] = $this->input->post('user_pengguna');
+        $data['nama_tambah_email'] = $this->input->post('email_pengguna');
         $data['select_pengguna_grup'] = $this->input->post('pengguna_grup');
         $data['password'] = $this->input->post('password');
         $data['konf_password'] = $this->input->post('konf_password');
@@ -173,7 +173,8 @@ class User extends CI_Controller{
             }else{
                 $insert = array();
                 $insert['nama_pengguna'] = $this->input->post('nama_pengguna');
-                $insert['username'] = $this->input->post('user_pengguna');
+                $insert['username'] = str_replace(' ','',$this->input->post('nama_pengguna'));
+                $insert['email'] = $this->input->post('email_pengguna');
                 $insert['pengguna_grup'] = $this->input->post('pengguna_grup');
                 $insert['password'] = sha1($this->input->post('password'));
                 $this->db->insert('pengguna', $insert);
@@ -220,7 +221,7 @@ class User extends CI_Controller{
                 $rowEdit = $dataEdit->row_array();
                 if($rowEdit){
                     $data['nama_edit_pengguna'] = $rowEdit['nama_pengguna'];
-                    $data['nama_edit_user'] = $rowEdit['username'];
+                    $data['nama_edit_email'] = $rowEdit['email'];
                     $data['select_pengguna_grup'] = $rowEdit['pengguna_grup'];
                     $data['pengguna_id_edit'] = $rowEdit['pengguna_id'];
                 }
@@ -233,12 +234,12 @@ class User extends CI_Controller{
     }
 
     public function update($page = 'user/edit_user'){
-        $dataValidation = array('nama_pengguna' => 'belum diisi', 'user_pengguna' => 'belum diisi', 'pengguna_grup' => 'belum dipilih');
+        $dataValidation = array('nama_pengguna' => 'belum diisi', 'email_pengguna' => 'belum diisi', 'pengguna_grup' => 'belum dipilih');
         is_validation($dataValidation);
         
         $data = array();
         $data['nama_edit_pengguna'] = $this->input->post('nama_pengguna');
-        $data['nama_edit_user'] = $this->input->post('user_pengguna');
+        $data['nama_edit_email'] = $this->input->post('email_pengguna');
         $data['select_pengguna_grup'] = $this->input->post('pengguna_grup');
         $data['errmsg'] = '';
         $data['filejs'] = '';
@@ -275,7 +276,7 @@ class User extends CI_Controller{
         }else{
             $update = array();
             $update['nama_pengguna'] = $this->input->post('nama_pengguna');
-            $update['username'] = $this->input->post('user_pengguna');
+            $update['email'] = $this->input->post('email_pengguna');
             $update['pengguna_grup'] = $this->input->post('pengguna_grup');
             $this->db->where('pengguna_id', $this->input->post('pengguna_id_edit'));
             $this->db->update('pengguna', $update);

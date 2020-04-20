@@ -13,6 +13,10 @@
             return $this->db->get_where($this->table, array('username' => $user, 'password' => $password));
         }
 
+        public function byEmailPassword($email, $password){
+            return $this->db->get_where($this->table, array('email' => $email, 'password' => $password));
+        }
+
         public function idGrup($idGrup){
             return $this->db->get_where($this->table_grup, array('grup_id' => $idGrup));
         }

@@ -40,10 +40,10 @@
 
       <?php echo form_open('admin/login/action') ?>
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="User" name="nama_pengguna" value="<?php echo $nama_pengguna ?>">
+          <input type="email" class="form-control" placeholder="Email" name="email" value="<?php echo $email ?>">
           <div class="input-group-append">
             <div class="input-group-text">
-              <span class="fas fa-user"></span>
+              <span class="fas fa-envelope"></span>
             </div>
           </div>
         </div>

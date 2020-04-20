@@ -37,7 +37,7 @@
               <tr class=''>
                 <th>No</th>
                 <th>Nama</th>
-                <th>Username</th>
+                <th>Email</th>
                 <th>Grup</th>
                 <th>Password</th>
                 <th>Opsi</th>

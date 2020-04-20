@@ -21,7 +21,7 @@ let table = $('#tableData').DataTable({
         }
       },
       { "data": "nama_pengguna" },
-      { "data": "username"},
+      { "data": "email"},
       { "data": "nama_grup"},
       { "mRender": function(data, type, full){
           if(adminGrup == 1 || sessionIdAdmin == full['pengguna_id'] && full[19]){

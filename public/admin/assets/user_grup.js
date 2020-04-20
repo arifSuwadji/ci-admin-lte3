@@ -20,9 +20,9 @@ let table = $('#tableData').DataTable({
       },
       { "mRender": function(data, type, full){
           if(full[21]){
-              return "<a href='"+hakAksesUrl+"/"+full['grup_id']+"'>"+full['nama_grup']+"</a>";
+              return `<a href='${hakAksesUrl}/${full['grup_id']}'><span class="btn btn-sm btn-primary fas fa-eye"></span></a>&emsp;${full['nama_grup']}`;
           }else{
-              return "<a href='javascript:void(0);'>"+full['nama_grup']+"</a>";
+              return `${full['nama_grup']}`;
           }
       }},
       { "mRender": function(data, type, full){

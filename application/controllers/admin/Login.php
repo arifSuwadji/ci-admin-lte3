@@ -14,32 +14,32 @@ class Login extends CI_controller {
         }
 
         $data = array();
-        $data['nama_pengguna'] =  '';
+        $data['email'] =  '';
         $data['password'] =  '';
         $data['errmsg'] = $_GET ? $_GET['errmsg'] : '';
         $this->load->view('pages/admin/login.php', $data);
     }
 
     public function action(){
-        $this->form_validation->set_rules('nama_pengguna','user', 'required', array('required' => '%s belum diisi'));
+        $this->form_validation->set_rules('email','Email', 'required', array('required' => '%s belum diisi'));
         $this->form_validation->set_rules('password','Password', 'required', array('required' => '%s belum diisi'));
 
         $data = array(
-            'username' => $this->input->post('nama_pengguna'),
+            'email' => $this->input->post('email'),
             'password' => $this->input->post('password')
         );
-        $data['nama_pengguna'] = $this->input->post('nama_pengguna');
+        $data['email'] = $this->input->post('email');
         $data['errmsg'] = '';
         if($this->form_validation->run() == FALSE){
             $this->load->view('pages/admin/login', $data);
         }else{
             $password = sha1($this->input->post('password'));
-            $dataAdmin = $this->ModelPengguna->byUserPassword($data['username'], $password);
+            $dataAdmin = $this->ModelPengguna->byEmailPassword($data['email'], $password);
             $row = $dataAdmin->row_array();
             if($row){
                 $dataSession = array();
                 $dataSession['pengguna_id'] = $row['pengguna_id'];
-                $dataSession['nama_pengguna'] = $row['nama_pengguna'];
+                $dataSession['email'] = $row['email'];
                 $dataSession['username'] = $row['username'];
                 $this->session->set_userdata('adminDistribusi', $dataSession);
                 $this->db->where('pengguna', $row['pengguna_id']);

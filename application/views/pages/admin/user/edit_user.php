@@ -19,14 +19,14 @@
   <section class='content'>
   <div class='container-fluid'>
     <?php if(validation_errors()){ ?>
-    <div class="alert alert-warning alert-dismissible col-sm-6 col-sm-offset-3">
+    <div class="alert alert-warning alert-dismissible">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
         <h4><i class="icon fa fa-warning"></i></h4>
         <?php echo validation_errors() ?>
     </div>
     <?php } ?>
     <?php if($errmsg){ ?>
-    <div class="alert alert-warning alert-dismissible col-sm-6 col-sm-offset-3">
+    <div class="alert alert-warning alert-dismissible">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
         <h4><i class="icon fa fa-warning"></i></h4>
         <?php echo $errmsg ?>
@@ -48,8 +48,8 @@
               <input type="text" class="form-control" placeholder="Nama Pengguna" name="nama_pengguna" value="<?php echo $nama_edit_pengguna ?>">
           </div>
           <div class="form-group">
-              <label for="pengguna">User Pengguna</label>
-              <input type="text" class="form-control" placeholder="User Pengguna" name="user_pengguna" value="<?php echo $nama_edit_user ?>">
+              <label for="pengguna">Email Pengguna</label>
+              <input type="text" class="form-control" placeholder="Email Pengguna" name="email_pengguna" value="<?php echo $nama_edit_email ?>">
           </div>
           <div class="form-group">
               <label for="pengguna">Pengguna Grup</label>

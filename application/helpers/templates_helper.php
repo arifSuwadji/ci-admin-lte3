@@ -15,7 +15,7 @@ function is_login(){
     if(isset($ci->session->userdata['adminDistribusi'])){
     }else{
         $data = array();
-        $data['nama_pengguna'] = $_GET ? $ci->input->get('nama_pengguna') : '';
+        $data['email'] = $_GET ? $ci->input->get('email') : '';
         $data['password'] = $_GET ? $ci->input->get('password') : '';
         $data['errmsg'] = $_GET ? $ci->input->get('errmsg') : '';
         $ci->load->view('pages/admin/login', $data);
