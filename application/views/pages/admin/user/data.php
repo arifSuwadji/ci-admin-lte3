@@ -22,7 +22,10 @@
           <div class='card'>
           <div class='card-header'>
             <h3 class='card-title'><?php echo $menuHalaman->sub_judul_menu ?></h3>
-            <?php if(isset($priviliges->{8})){ ?><a href="<?php echo $tambahData ?>"><button class="btn btn-primary btn-sm float-right text-bold">Tambah Pengguna</button></a><?php }else{?><button class="btn btn-default btn-sm float-right text-bold" disabled>Tambah Pengguna</button><?php } ?>
+            <?php if(isset($priviliges->{8})){ ?><a href="<?php echo $tambahData ?>"><div class="float-right"><button class="btn btn-primary btn-sm text-bold">Tambah Pengguna</button></a><?php }else{?><button class="btn btn-default btn-sm text-bold" disabled>Tambah Pengguna</button><?php } ?>
+            <?php if(isset($priviliges->{23})){ ?><a href="<?php echo $exportpdf ?>"><button class="btn btn-info btn-sm text-bold" ><i class="fas fa-file-pdf"></i> PDF</button><a><?php }else{?><button class="btn btn-default btn-sm text-bold" disabled><i class="fas fa-file-pdf"></i> PDF</button><?php } ?>
+            <?php if(isset($priviliges->{24})){ ?><a href="<?php echo $exportexcel ?>"><button class="btn btn-info btn-sm text-bold" ><i class="fas fa-file-excel"></i> Excel</button><a><?php }else{?><button class="btn btn-default btn-sm text-bold" disabled><i class="fas fa-file-excel"></i> Excel</button><?php } ?>
+
             <input type="hidden" id="dataJson" value="<?php echo $dataJson ?>"/>
             <input type="hidden" id="editData" value="<?php echo $editData ?>"/>
             <input type="hidden" id="hapusJson" value="<?php echo $hapusData ?>"/>
@@ -30,6 +33,8 @@
             <input type="hidden" id="adminGrup" value="<?php echo $pengguna_grup ?>"/>
             <input type="hidden" id="sessionIdAdmin" value="<?php echo $this->session->userdata['adminDistribusi']['pengguna_id']?>">
           </div>
+          <br>
+          <br>
           <!--card header-->
           <div class='card-body table-responsive p-0'>
             <table id="tableData" class='table table-striped table-bordered table-hover text-nowrap'>

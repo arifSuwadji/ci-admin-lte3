@@ -27,6 +27,8 @@ class User extends CI_Controller{
             $data['editData'] = base_url().'admin/editPengguna';
             $data['hapusData'] = base_url().'admin/hapusPengguna';
             $data['gantiPassword'] = base_url().'admin/gantiPassword';
+            $data['exportpdf'] = base_url(). 'admin/pdfPengguna';
+            $data['exportexcel'] = base_url(). 'admin/excelPengguna';
             $current_url = $this->uri->segment(1);
             if($this->uri->segment(2)){
                 $current_url .= '/'.$this->uri->segment(2);
@@ -303,6 +305,40 @@ class User extends CI_Controller{
             ->set_output(json_encode($response, JSON_PRETTY_PRINT))
             ->_display();
         exit;
+    }
+
+    public function pdf($page = 'user/pdf_user'){
+        $current_url = $this->uri->segment(1);
+        if($this->uri->segment(2)){
+            $current_url .= '/'.$this->uri->segment(2);
+        }
+        $data['menuHalaman'] = $this->ModelHalamanMenu->byUrl($current_url)->row();
+        $title = explode('(',$data['menuHalaman']->sub_judul_menu);
+        $data['users']= $this->ModelPengguna->getAll();
+        $showTitle = $title[0];
+
+	    $html = $this->load->view("pages/admin/".$page, $data, true);
+	    $this->pdfgenerator->generate($html, $showTitle);
+    }
+
+    public function excel(){
+        $current_url = $this->uri->segment(1);
+        if($this->uri->segment(2)){
+            $current_url .= '/'.$this->uri->segment(2);
+        }
+        $data['menuHalaman'] = $this->ModelHalamanMenu->byUrl($current_url)->row();
+        $title = explode('(',$data['menuHalaman']->sub_judul_menu);
+
+        $header = array("nama_pengguna", "email", "nama_grup");
+        $content = array();
+        $allData = $this->ModelPengguna->getAll();
+        foreach($allData->result()  as $data){
+            array_push($content, [
+                'nama_pengguna' => $data->nama_pengguna, 'email' => $data->email, 'nama_grup' => $data->nama_grup]);
+        }
+
+        $filename=$title[0]." ".date("d-m-Y")." - DistribusiAPD.xlsx";
+        $this->excelgenerator->generate($header, $content, $filename, 'DistribusiAPD');
     }
 
     public function grup($page = 'user/user_grup'){

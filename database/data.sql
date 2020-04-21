@@ -62,6 +62,8 @@ INSERT INTO `halaman_menu` VALUES (19,'Pengguna','Ganti Password','admin/gantiPa
 INSERT INTO `halaman_menu` VALUES (20,'Pengguna','Ganti Password (Aksi)','admin/updatePassword','zmdi zmdi-accounts-alt','tidak');
 INSERT INTO `halaman_menu` VALUES (21,'Pengguna','Hak Akses','admin/hakAkses','zmdi zmdi-group-work','tidak');
 INSERT INTO `halaman_menu` VALUES (22,'Pengguna','Hak Akses (Aksi)','admin/updateHakAkses','zmdi zmdi-group-work','tidak');
+INSERT INTO `halaman_menu` VALUES (23,'Pengguna','PDF - Data Pengguna','admin/pdfPengguna','nav-icon fas fa-user','tidak');
+INSERT INTO `halaman_menu` VALUES (24,'Pengguna','Excel - Data Pengguna','admin/excelPengguna','nav-icon fas fa-user','tidak');
 
 --
 -- Dumping data for table `pengguna`

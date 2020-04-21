@@ -46,6 +46,13 @@
             return $this->db->delete($this->table_grup, array('grup_id' => $idGrup));
         }
 
+        public function getAll(){
+            $this->db->select('*');
+            $this->db->from($this->table);
+            $this->db->join($this->table_grup, $this->table.'.pengguna_grup = '.$this->table_grup.'.grup_id');
+            return $this->db->get();
+        }
+
         function countAdmin($value){
             if($value){
                 $this->db->or_like('nama_pengguna', $value);
