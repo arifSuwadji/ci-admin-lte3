@@ -51,10 +51,10 @@ class AdjiGenerator extends CI_Controller {
 
     public function crud_foreignkey ($controller="", $table="", $table_foreignkey_one="", $table_foreignkey_two=""){
         //load controller
-        $admin_controller = admin_foreignkey_controller($controller, $table, $table_foreignkey_one, $table_foreignkey_two, $this->buttonTambah, $this->buttonTambahAksi, $this->buttonEdit, $this->buttonEditAksi, $this->buttonHapus);
+        $admin_controller = admin_foreignkey_controller($controller, $table, $table_foreignkey_one, $table_foreignkey_two, $this->buttonTambah, $this->buttonTambahAksi, $this->buttonEdit, $this->buttonEditAksi, $this->buttonHapus, $this->buttonPdf, $this->buttonExcel);
 
         //load template index
-        template_foreignkey_index($controller, $table, $table_foreignkey_one, $table_foreignkey_two, $admin_controller['buttonTambah'], $admin_controller['buttonTambahAksi'], $admin_controller['buttonEdit'], $admin_controller['buttonEditAksi'], $admin_controller['buttonHapus']);
+        template_foreignkey_index($controller, $table, $table_foreignkey_one, $table_foreignkey_two, $admin_controller['buttonTambah'], $admin_controller['buttonTambahAksi'], $admin_controller['buttonEdit'], $admin_controller['buttonEditAksi'], $admin_controller['buttonHapus'], $admin_controller['buttonPdf'], $admin_controller['buttonExcel']);
 
         //load template tambah
         template_foreignkey_tambah($controller, $table, $table_foreignkey_one, $table_foreignkey_two, $admin_controller['buttonTambah'], $admin_controller['buttonTambahAksi'], $admin_controller['buttonEdit'], $admin_controller['buttonEditAksi'], $admin_controller['buttonHapus']);
@@ -62,6 +62,9 @@ class AdjiGenerator extends CI_Controller {
         //load template edit
         template_foreignkey_edit($controller, $table, $table_foreignkey_one, $table_foreignkey_two, $admin_controller['buttonTambah'], $admin_controller['buttonTambahAksi'], $admin_controller['buttonEdit'], $admin_controller['buttonEditAksi'], $admin_controller['buttonHapus']);
 
+        //load template pdf
+        template_foreignkey_pdf($controller, $table);
+        
         //load models
         model_foreignkey_generator($controller, $table, $table_foreignkey_one, $table_foreignkey_two);
 

@@ -26,7 +26,10 @@ class ExcelGenerator{
         }
 
         //header title
-        $i = 0;
+        $i = 1;
+        $cell = $addres[0];
+        $numberCell = 1;
+        $sheet->setCellValue($cell.$numberCell, 'No');
         foreach($header as $title){
             $langField = str_replace('_',' ', $title);
             $langField = ucwords($langField);
@@ -41,8 +44,10 @@ class ExcelGenerator{
         foreach($content as $key => $value){
             $numberCell = $i+1;
             $n = 1;
+            $cell = $addres[0];
+            $sheet->setCellValue($cell.$numberCell, $i);
             foreach($header as $title){
-                $cell = $addres[$n-1];
+                $cell = $addres[$n];
                 $sheet->setCellValue($cell.$numberCell, $value[$title]);
                 $n++;
             }
