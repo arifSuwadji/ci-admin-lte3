@@ -30,6 +30,7 @@
             <input type="hidden" id="adminGrup" value="<?php echo $pengguna_grup ?>"/>
             <input type="hidden" id="sessionIdAdmin" value="<?php echo $this->session->userdata['adminDistribusi']['pengguna_id']?>">
           </div>
+          <br>
           <!--card header-->
           <div class='card-body table-responsive p-0'>
             <table id="tableData" class='table table-striped table-bordered table-hover text-nowrap'>

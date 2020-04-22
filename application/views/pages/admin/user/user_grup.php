@@ -28,6 +28,7 @@
             <input type="hidden" id="hapusJson" value="<?php echo $hapusData ?>"/>
             <input type="hidden" id="hakAkses" value="<?php echo $hakAkses?>" />
           </div>
+          <br>
           <!--card header-->
           <div class='card-body table-responsive p-0'>
             <table id="tableData" class='table table-striped table-bordered table-hover text-nowrap'>
