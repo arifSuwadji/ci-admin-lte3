@@ -2,7 +2,7 @@
 /**
  * controller function
  */
-function admin_controller($controller, $table, $buttonTambah, $buttonTambahAksi, $buttonEdit, $buttonEditAksi, $buttonHapus){
+function admin_controller($controller, $table, $buttonTambah, $buttonTambahAksi, $buttonEdit, $buttonEditAksi, $buttonHapus, $buttonPdf, $buttonExcel){
         $ci =& get_instance();
         
         $allColumns = AllField($table);
@@ -108,6 +108,38 @@ function admin_controller($controller, $table, $buttonTambah, $buttonTambahAksi,
             $buttonHapus = $ci->db->insert_id();
         }
 
+        $data .="\$route['admin/pdf".$controller."'] = 'admin/".$controller."/pdf';\r\n";
+        //insert pdf
+        $sub_judul = 'PDF - '.$judul_menu;
+        $url_menu = 'admin/pdf'.$controller;
+        $icon_menu = 'nav-icon fas fa-bars';
+        $aktif_menu = 'tidak';
+        $where = array('judul_menu' => $judul_menu, 'sub_judul_menu' => $sub_judul, 'url_menu' => $url_menu, 'icon_menu' => $icon_menu, 'aktif_menu' => $aktif_menu);
+        //insert or find
+        $findData = $ci->db->get_where('halaman_menu', $where)->row();
+        if($findData){
+            $buttonPdf = $findData->menu_id;
+        }else{
+            $ci->db->insert('halaman_menu', $where);
+            $buttonPdf = $ci->db->insert_id();
+        }
+
+        $data .="\$route['admin/excel".$controller."'] = 'admin/".$controller."/excel';\r\n";
+        //insert excel
+        $sub_judul = 'Excel - '.$judul_menu;
+        $url_menu = 'admin/excel'.$controller;
+        $icon_menu = 'nav-icon fas fa-bars';
+        $aktif_menu = 'tidak';
+        $where = array('judul_menu' => $judul_menu, 'sub_judul_menu' => $sub_judul, 'url_menu' => $url_menu, 'icon_menu' => $icon_menu, 'aktif_menu' => $aktif_menu);
+        //insert or find
+        $findData = $ci->db->get_where('halaman_menu', $where)->row();
+        if($findData){
+            $buttonExcel = $findData->menu_id;
+        }else{
+            $ci->db->insert('halaman_menu', $where);
+            $buttonExcel = $ci->db->insert_id();
+        }
+
         if(!write_file($routePath, $data, 'a')){
             echo 'Unable to write Router the file'."\r\n";
         }else{
@@ -148,6 +180,8 @@ class ".$controller." extends CI_Controller{
             $data["tambahData"] = base_url()."admin/tambah'.$controller.'";
             $data["editData"] = base_url()."admin/edit'.$controller.'";
             $data["hapusData"] = base_url()."admin/hapus'.$controller.'";
+            $data["exportpdf"] = base_url(). "admin/pdf'.$controller.'";
+            $data["exportexcel"] = base_url(). "admin/excel'.$controller.'";
             $current_url = $this->uri->segment(1);
             if($this->uri->segment(2)){
                 $current_url .= "/".$this->uri->segment(2);
@@ -517,13 +551,75 @@ class ".$controller." extends CI_Controller{
             ->_display();
         exit;
     }
+        ';
+
+        $string .='
+    public function pdf($page = "'.$table.'/pdf"){
+        $current_url = $this->uri->segment(1);
+        if($this->uri->segment(2)){
+            $current_url .= "/".$this->uri->segment(2);
+        }
+        $data["menuHalaman"] = $this->ModelHalamanMenu->byUrl($current_url)->row();
+        $title = explode("(",$data["menuHalaman"]->sub_judul_menu);
+        $data["dataPdf"]= $this->Model'.$controller.'->getAll();
+        $showTitle = $title[0];
+    
+        $html = $this->load->view("pages/admin/".$page, $data, true);
+        $this->pdfgenerator->generate($html, $showTitle);
+    }
+        ';
+
+        $string .='
+    public function excel(){
+        $current_url = $this->uri->segment(1);
+        if($this->uri->segment(2)){
+            $current_url .= "/".$this->uri->segment(2);
+        }
+        $data["menuHalaman"] = $this->ModelHalamanMenu->byUrl($current_url)->row();
+        $title = explode("(",$data["menuHalaman"]->sub_judul_menu);
+
+        $header = array();
+        ';
+        $i =0;
+        foreach($dataFilter as $fieldName){
+            $i++;
+            if($i > 1){
+        $string .='
+        array_push($header, "'.$fieldName.'");
+        ';
+            }
+        }
+        
+        $string .='
+        $content = array();
+        $allData = $this->Model'.$controller.'->getAll();
+        foreach($allData->result()  as $data){
+            array_push($content, [
+        ';
+        $i =0;
+        foreach($dataFilter as $fieldName){
+            $i++;
+            if($i > 1){
+        $string .='
+            "'.$fieldName.'" => $data->'.$fieldName.',
+        ';
+            }
+        }
+        
+        $string .='
+            ]);
+        }
+        $filename=$title[0]." ".date("d-m-Y")." - DistribusiAPD.xlsx";
+        $this->excelgenerator->generate($header, $content, $filename, "'.$table.'");
+    }
+        
 }
 ?>
         ';
         
         $path = APPPATH."controllers/admin/".$controller.".php";
         createFile($string, $path);
-        return array('buttonTambah' => $buttonTambah, 'buttonTambahAksi' => $buttonTambahAksi, 'buttonEdit' => $buttonEdit, 'buttonEditAksi' => $buttonEditAksi, 'buttonHapus' => $buttonHapus);
+        return array('buttonTambah' => $buttonTambah, 'buttonTambahAksi' => $buttonTambahAksi, 'buttonEdit' => $buttonEdit, 'buttonEditAksi' => $buttonEditAksi, 'buttonHapus' => $buttonHapus, 'buttonPdf' => $buttonPdf, 'buttonExcel' => $buttonExcel);
 }
 
 /**
@@ -549,6 +645,12 @@ class Model'.$controller.' extends CI_model{
 
     function hapusData($'.$dataFilter[0].'){
         return $this->db->delete($this->table, array("'.$dataFilter[0].'" => $'.$dataFilter[0].'));
+    }
+
+    public function getAll(){
+        $this->db->select("*");
+        $this->db->from($this->table);
+        return $this->db->get();
     }
 
     function count'.$controller.'($value){
@@ -590,7 +692,7 @@ class Model'.$controller.' extends CI_model{
     createFile($string, $path);
 }
 
-function template_index($controller, $table, $buttonTambah, $buttonTambahAksi, $buttonEdit, $buttonEditAksi, $buttonHapus){
+function template_index($controller, $table, $buttonTambah, $buttonTambahAksi, $buttonEdit, $buttonEditAksi, $buttonHapus, $buttonPdf, $buttonExcel){
     $ci =& get_instance();
     
     $allColumns = AllField($table);
@@ -623,16 +725,21 @@ function template_index($controller, $table, $buttonTambah, $buttonTambahAksi, $
             <div class="card">
             <div class="card-header">
               <h3 class="card-title"><?php echo $menuHalaman->sub_judul_menu ?></h3>
-              <?php if(isset($priviliges->{'.$buttonTambah.'})){ ?><a href="<?php echo $tambahData ?>"><button class="btn btn-primary btn-sm float-right text-bold">Tambah '.ucwords(str_replace('_',' ', $table)).'</button></a><?php }else{?><button class="btn btn-default btn-sm float-right text-bold" disabled>Tambah '.ucwords(str_replace('_',' ', $table)).'</button><?php } ?>
+              <div class="float-right">
+              <?php if(isset($priviliges->{'.$buttonTambah.'})){ ?><a href="<?php echo $tambahData ?>"><button class="btn btn-primary btn-sm text-bold">Tambah '.ucwords(str_replace('_',' ', $table)).'</button></a><?php }else{?><button class="btn btn-default btn-sm text-bold" disabled>Tambah '.ucwords(str_replace('_',' ', $table)).'</button><?php } ?>
+              <?php if(isset($priviliges->{'.$buttonPdf.'})){ ?><a href="<?php echo $exportpdf ?>"><button class="btn btn-info btn-sm text-bold" ><i class="fas fa-file-pdf"></i> PDF</button><a><?php }else{?><button class="btn btn-default btn-sm text-bold" disabled><i class="fas fa-file-pdf"></i> PDF</button><?php } ?>
+              <?php if(isset($priviliges->{'.$buttonExcel.'})){ ?><a href="<?php echo $exportexcel ?>"><button class="btn btn-info btn-sm text-bold" ><i class="fas fa-file-excel"></i> Excel</button><a><?php }else{?><button class="btn btn-default btn-sm text-bold" disabled><i class="fas fa-file-excel"></i> Excel</button><?php } ?>
+              </div>
               <input type="hidden" id="dataJson" value="<?php echo $dataJson ?>"/>
               <input type="hidden" id="editData" value="<?php echo $editData ?>"/>
               <input type="hidden" id="hapusJson" value="<?php echo $hapusData ?>"/>
               <input type="hidden" id="adminGrup" value="<?php echo $pengguna_grup ?>"/>
               <input type="hidden" id="sessionIdAdmin" value="<?php echo $this->session->userdata["adminDistribusi"]["pengguna_id"]?>">
             </div>
+            <br>
             <!--card header-->
             <div class="card-body table-responsive p-0">
-              <table id="tableData" class="table table-striped table-bordered table-hover text-nowrap">
+              <table id="tableData" class="table table-striped table-bordered table-hover">
               <thead class="bg-primary">
                 <tr class="">
     ';
@@ -834,6 +941,90 @@ function template_edit($controller, $table, $buttonTambah, $buttonTambahAksi, $b
 
     ';
     $path = APPPATH."views/pages/admin/".$table."/edit.php";
+    createFile($string, $path);
+}
+
+function template_pdf($controller, $table){
+    $ci =& get_instance();
+    
+    $allColumns = AllField($table);
+    $dataFilter = array();
+    foreach($allColumns as $fieldName){
+        array_push($dataFilter, $fieldName['column_name']);
+    }
+
+    $string ='
+    <!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <?php $title= array("Dashboard"); if($menuHalaman){$title = explode("(",$menuHalaman->sub_judul_menu); }?>
+  <title>Distribusi APD | <?php echo $title[0] ?></title>
+  <?php echo asset_icon("AdminLTELogo.png")?>
+  <?php echo asset_plugin_css("tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css") ?>
+  <?php echo asset_css("adminlte.min.css") ?>
+  <style>
+  table, th, td {
+    border: 1px solid black;
+    padding: 4px;word-wrap:break-word;
+  }
+  </style>
+</head>
+<body style="font-size:12px;">
+	<div >
+        <div class="float-right">
+            <br><?php if($menuHalaman){$title = explode("(",$menuHalaman->sub_judul_menu); } echo $title[0] ?>,  <?php echo dateText(date("d-m-Y")) ?>
+        </div>
+        <br>
+        <br>
+        <table class="table table-striped table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>No</th>
+    ';
+    $i = 0;
+    foreach($dataFilter as $fieldName){
+        $i++;
+        $langField = str_replace('_',' ', $fieldName);
+        $langField = ucwords($langField);
+        if($i > 1){
+    $string .='
+                    <th>'.$langField.'</th>
+    ';
+        }
+    }
+    $string .='
+                </tr>
+            </thead>
+            <tbody>
+                <?php $no=1; ?>
+                <?php foreach($dataPdf->result() as $data): ?>
+                <tr>
+                    <td><?php echo $no; ?></td>
+    ';
+    $i = 0;
+    foreach($dataFilter as $fieldName){
+        $i++;
+        if($i > 1){
+    $string .='
+                    <td style=""><?php echo $data->'.$fieldName.'; ?></td>
+    ';
+        }
+    }
+    $string .='
+                </tr>
+                <?php $no++; ?>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+	 </div>
+</body>
+</html>
+
+    ';
+    $path = APPPATH."views/pages/admin/".$table."/pdf.php";
     createFile($string, $path);
 }
 

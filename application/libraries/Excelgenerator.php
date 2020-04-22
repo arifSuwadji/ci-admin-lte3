@@ -6,11 +6,17 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class ExcelGenerator{
     public function generate($header, $content, $filename, $creator=""){
-        // instantiate and use the Spreadsheet class
+        
+        $ci =& get_instance();
+        
+        //  Create new Spreadsheet object
         $spreadsheet = new Spreadsheet();
-        $spreadsheet->getProperties()->setCreator($creator);
 
-        // Output the generated Xlsx
+        //Set document properties
+        $spreadsheet->getProperties()->setCreator($creator)
+            ->setLastModifiedBy('Arif Suwadji');
+
+        // create sheet object
         $sheet = $spreadsheet->getActiveSheet();
 
         //set address
@@ -43,18 +49,17 @@ class ExcelGenerator{
             $i++;
         }
 
-        //download file
-        header("Pragma: public");
-        header("Expires: 0");
-        header("Cache-Control: must-revalidate, post-check=0,pre-check=0");
-        header("Content-Type: application/force-download");
-        header("Content-Type: application/octet-stream");
-        header("Content-Type: application/download");
-        header("Content-Disposition: attachment;filename=" . $filename . "");
-        header("Content-Transfer-Encoding: binary ");
+        // Rename worksheet
+        $spreadsheet->getActiveSheet()->setTitle($creator);
 
+        //download - write file
         $writer = new Xlsx($spreadsheet);
-        $writer->save('php://output');
+        $writer->save('download/'.$filename);
+
+        //download file
+        header("Location: ".base_url().'download/'.$filename);
+        $filepath = FCPATH."download/" . $filename;
+        $ci->session->userdata['adminDistribusi']['fileExcel'] = $filepath;
         exit;
     }
 }

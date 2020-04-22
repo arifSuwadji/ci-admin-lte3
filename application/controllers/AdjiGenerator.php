@@ -6,6 +6,8 @@ class AdjiGenerator extends CI_Controller {
     private $buttonEdit = '';
     private $buttonEditAksi = '';
     private $buttonHapus = '';
+    private $buttonPdf = '';
+    private $buttonExcel = '';
     
     public function __construct(){
         parent::__construct();
@@ -15,23 +17,27 @@ class AdjiGenerator extends CI_Controller {
         $result = "Adji Generator commands\r\n";
         $result .= "php index.php AdjiGenerator crud ControllerName table_Name \r\n";
         $result .= "php index.php AdjiGenerator crud_foreignkey ControllerName table_Name table_foreign_one table_foreign_two \r\n";
-        $result .= "php index.php AdjiGenerator api ControllerName table_Name \r\n";
+        $result .= "php index.php AdjiGenerator restApi ControllerName table_Name \r\n";
+        $result .= "php index.php AdjiGenerator restApi_foreignkey ControllerName table_Name table_foreign_one table_foreing_two \r\n";
 
         echo $result. PHP_EOL;
     }
 
     public function crud($controller="", $table=""){
         //load controller
-        $admin_controller = admin_controller($controller, $table, $this->buttonTambah, $this->buttonTambahAksi, $this->buttonEdit, $this->buttonEditAksi, $this->buttonHapus);
+        $admin_controller = admin_controller($controller, $table, $this->buttonTambah, $this->buttonTambahAksi, $this->buttonEdit, $this->buttonEditAksi, $this->buttonHapus, $this->buttonPdf, $this->buttonExcel);
 
         //load template index
-        template_index($controller, $table, $admin_controller['buttonTambah'], $admin_controller['buttonTambahAksi'], $admin_controller['buttonEdit'], $admin_controller['buttonEditAksi'], $admin_controller['buttonHapus']);
+        template_index($controller, $table, $admin_controller['buttonTambah'], $admin_controller['buttonTambahAksi'], $admin_controller['buttonEdit'], $admin_controller['buttonEditAksi'], $admin_controller['buttonHapus'], $admin_controller['buttonPdf'], $admin_controller['buttonExcel']);
 
         //load template tambah
         template_tambah($controller, $table, $admin_controller['buttonTambah'], $admin_controller['buttonTambahAksi'], $admin_controller['buttonEdit'], $admin_controller['buttonEditAksi'], $admin_controller['buttonHapus']);
 
         //load template edit
         template_edit($controller, $table, $admin_controller['buttonTambah'], $admin_controller['buttonTambahAksi'], $admin_controller['buttonEdit'], $admin_controller['buttonEditAksi'], $admin_controller['buttonHapus']);
+
+        //load template pdf
+        template_pdf($controller, $table);
 
         //load models
         model_generator($controller, $table);
@@ -66,6 +72,11 @@ class AdjiGenerator extends CI_Controller {
         echo "table ".$table."\r\n";
         echo "table foreign one ".$table_foreignkey_one."\r\n";
         echo "table foreign two ".$table_foreignkey_two."\r\n";
+    }
+
+    public function api ($controller="", $table=""){
+        echo "RestAPI ".$controller."\r\n";
+        echo "table ".$table."\r\n";
     }
 }
 

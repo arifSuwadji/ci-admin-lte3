@@ -35,33 +35,35 @@ INSERT INTO `hak_akses_menu` VALUES (1,19);
 INSERT INTO `hak_akses_menu` VALUES (1,20);
 INSERT INTO `hak_akses_menu` VALUES (1,21);
 INSERT INTO `hak_akses_menu` VALUES (1,22);
+INSERT INTO `hak_akses_menu` VALUES (1,23);
+INSERT INTO `hak_akses_menu` VALUES (1,24);
 
 --
 -- Dumping data for table `halaman_menu`
 --
 
-INSERT INTO `halaman_menu` VALUES (1,'Kelola Menu','Data Menu','admin/menu','zmdi zmdi-menu','ya');
-INSERT INTO `halaman_menu` VALUES (2,'Kelola Menu','Tambah Menu','admin/tambahMenu','zmdi zmdi-menu','tidak');
-INSERT INTO `halaman_menu` VALUES (3,'Kelola Menu','Tambah Menu (Aksi)','admin/tambahMenuBaru','zmdi zmdi-menu','tidak');
-INSERT INTO `halaman_menu` VALUES (4,'Kelola Menu','Edit Menu','admin/editMenu','zmdi zmdi-menu','tidak');
-INSERT INTO `halaman_menu` VALUES (5,'Kelola Menu','Edit Menu (Aksi)','admin/updateMenu','zmdi zmdi-menu','tidak');
-INSERT INTO `halaman_menu` VALUES (6,'Kelola Menu','Hapus Menu','admin/hapusMenu','zmdi zmdi-menu','tidak');
-INSERT INTO `halaman_menu` VALUES (7,'Pengguna','Data Pengguna','admin/pengguna','zmdi zmdi-accounts-alt','ya');
-INSERT INTO `halaman_menu` VALUES (8,'Pengguna','Tambah Pengguna','admin/tambahPengguna','zmdi zmdi-accounts-alt','tidak');
-INSERT INTO `halaman_menu` VALUES (9,'Pengguna','Tambah Pengguna (Aksi)','admin/tambahPenggunaBaru','zmdi zmdi-accounts-alt','tidak');
-INSERT INTO `halaman_menu` VALUES (10,'Pengguna','Edit Pengguna','admin/editPengguna','zmdi zmdi-accounts-alt','tidak');
-INSERT INTO `halaman_menu` VALUES (11,'Pengguna','Edit Pengguna (Aksi)','admin/updatePengguna','zmdi zmdi-accounts-alt','tidak');
-INSERT INTO `halaman_menu` VALUES (12,'Pengguna','Hapus Pengguna','admin/hapusPengguna','zmdi zmdi-accounts-alt','tidak');
-INSERT INTO `halaman_menu` VALUES (13,'Pengguna','Data Grup','admin/penggunaGrup','zmdi zmdi-group-work','ya');
-INSERT INTO `halaman_menu` VALUES (14,'Pengguna','Tambah Grup','admin/tambahGrup','zmdi zmdi-group-work','tidak');
-INSERT INTO `halaman_menu` VALUES (15,'Pengguna','Tambah Grup (Aksi)','admin/tambahGrupBaru','zmdi zmdi-group-work','tidak');
-INSERT INTO `halaman_menu` VALUES (16,'Pengguna','Edit Grup','admin/editGrup','zmdi zmdi-group-work','tidak');
-INSERT INTO `halaman_menu` VALUES (17,'Pengguna','Edit Grup (Aksi)','admin/updateGrup','zmdi zmdi-group-work','tidak');
-INSERT INTO `halaman_menu` VALUES (18,'Pengguna','Hapus Grup','admin/hapusGrup','zmdi zmdi-group-work','tidak');
-INSERT INTO `halaman_menu` VALUES (19,'Pengguna','Ganti Password','admin/gantiPassword','zmdi zmdi-accounts-alt','tidak');
-INSERT INTO `halaman_menu` VALUES (20,'Pengguna','Ganti Password (Aksi)','admin/updatePassword','zmdi zmdi-accounts-alt','tidak');
-INSERT INTO `halaman_menu` VALUES (21,'Pengguna','Hak Akses','admin/hakAkses','zmdi zmdi-group-work','tidak');
-INSERT INTO `halaman_menu` VALUES (22,'Pengguna','Hak Akses (Aksi)','admin/updateHakAkses','zmdi zmdi-group-work','tidak');
+INSERT INTO `halaman_menu` VALUES (1,'Kelola Menu','Data Menu','admin/menu','nav-icon fas fa-bars','ya');
+INSERT INTO `halaman_menu` VALUES (2,'Kelola Menu','Tambah Menu','admin/tambahMenu','nav-icon fas fa-bars','tidak');
+INSERT INTO `halaman_menu` VALUES (3,'Kelola Menu','Tambah Menu (Aksi)','admin/tambahMenuBaru','nav-icon fas fa-bars','tidak');
+INSERT INTO `halaman_menu` VALUES (4,'Kelola Menu','Edit Menu','admin/editMenu','nav-icon fas fa-bars','tidak');
+INSERT INTO `halaman_menu` VALUES (5,'Kelola Menu','Edit Menu (Aksi)','admin/updateMenu','nav-icon fas fa-bars','tidak');
+INSERT INTO `halaman_menu` VALUES (6,'Kelola Menu','Hapus Menu','admin/hapusMenu','nav-icon fas fa-bars','tidak');
+INSERT INTO `halaman_menu` VALUES (7,'Pengguna','Data Pengguna','admin/pengguna','nav-icon fas fa-user','ya');
+INSERT INTO `halaman_menu` VALUES (8,'Pengguna','Tambah Pengguna','admin/tambahPengguna','nav-icon fas fa-user','tidak');
+INSERT INTO `halaman_menu` VALUES (9,'Pengguna','Tambah Pengguna (Aksi)','admin/tambahPenggunaBaru','nav-icon fas fa-user','tidak');
+INSERT INTO `halaman_menu` VALUES (10,'Pengguna','Edit Pengguna','admin/editPengguna','nav-icon fas fa-user','tidak');
+INSERT INTO `halaman_menu` VALUES (11,'Pengguna','Edit Pengguna (Aksi)','admin/updatePengguna','nav-icon fas fa-user','tidak');
+INSERT INTO `halaman_menu` VALUES (12,'Pengguna','Hapus Pengguna','admin/hapusPengguna','nav-icon fas fa-user','tidak');
+INSERT INTO `halaman_menu` VALUES (13,'Pengguna','Data Grup','admin/penggunaGrup','nav-icon fas fa-user-friends','ya');
+INSERT INTO `halaman_menu` VALUES (14,'Pengguna','Tambah Grup','admin/tambahGrup','nav-icon fas fa-user-friends','tidak');
+INSERT INTO `halaman_menu` VALUES (15,'Pengguna','Tambah Grup (Aksi)','admin/tambahGrupBaru','nav-icon fas fa-user-friends','tidak');
+INSERT INTO `halaman_menu` VALUES (16,'Pengguna','Edit Grup','admin/editGrup','nav-icon fas fa-user-friends','tidak');
+INSERT INTO `halaman_menu` VALUES (17,'Pengguna','Edit Grup (Aksi)','admin/updateGrup','nav-icon fas fa-user-friends','tidak');
+INSERT INTO `halaman_menu` VALUES (18,'Pengguna','Hapus Grup','admin/hapusGrup','nav-icon fas fa-user-friends','tidak');
+INSERT INTO `halaman_menu` VALUES (19,'Pengguna','Ganti Password','admin/gantiPassword','nav-icon fas fa-user','tidak');
+INSERT INTO `halaman_menu` VALUES (20,'Pengguna','Ganti Password (Aksi)','admin/updatePassword','nav-icon fas fa-user','tidak');
+INSERT INTO `halaman_menu` VALUES (21,'Pengguna','Hak Akses','admin/hakAkses','nav-icon fas fa-user-friends','tidak');
+INSERT INTO `halaman_menu` VALUES (22,'Pengguna','Hak Akses (Aksi)','admin/updateHakAkses','nav-icon fas fa-user-friends','tidak');
 INSERT INTO `halaman_menu` VALUES (23,'Pengguna','PDF - Data Pengguna','admin/pdfPengguna','nav-icon fas fa-user','tidak');
 INSERT INTO `halaman_menu` VALUES (24,'Pengguna','Excel - Data Pengguna','admin/excelPengguna','nav-icon fas fa-user','tidak');
 

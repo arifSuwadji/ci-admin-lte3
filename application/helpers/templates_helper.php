@@ -13,6 +13,11 @@ function is_login(){
     $ci =& get_instance();
     
     if(isset($ci->session->userdata['adminDistribusi'])){
+        if($ci->session->userdata['adminDistribusi']['fileExcel'] == ''){
+        }else{
+            unlink($ci->session->userdata['adminDistribusi']['fileExcel']);
+            $ci->session->userdata['adminDistribusi']['fileExcel'] = '';
+        }
     }else{
         $data = array();
         $data['email'] = $_GET ? $ci->input->get('email') : '';

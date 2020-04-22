@@ -338,7 +338,7 @@ class User extends CI_Controller{
         }
 
         $filename=$title[0]." ".date("d-m-Y")." - DistribusiAPD.xlsx";
-        $this->excelgenerator->generate($header, $content, $filename, 'DistribusiAPD');
+        $this->excelgenerator->generate($header, $content, $filename, 'pengguna');
     }
 
     public function grup($page = 'user/user_grup'){
