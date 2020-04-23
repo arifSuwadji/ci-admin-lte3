@@ -84,6 +84,14 @@ class AdjiGenerator extends CI_Controller {
         echo "RestAPI ".$controller."\r\n";
         echo "table ".$table."\r\n";
     }
+
+    public function restApi_foreignkey ($controller="", $table="", $table_foreignkey_one="", $table_foreignkey_two=""){
+        //load api controller
+        $api_controller = api_foreignkey_controller($controller, $table, $table_foreignkey_one, $table_foreignkey_two);
+
+        echo "RestAPI ".$controller."\r\n";
+        echo "table ".$table."\r\n";
+    }
 }
 
 ?>

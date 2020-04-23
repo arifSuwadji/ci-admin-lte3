@@ -86,12 +86,29 @@ function session_mobile($token){
 
 /**
  * validation params
+ * method POST
  */
 function validation_params($dataArray){
     $ci =& get_instance();
 
     for($i=0; $i < count($dataArray); $i++){
         $param = $ci->input->post($dataArray[$i]);
+        if(!$param){
+            return array('status' => FALSE, 'message' => 'params '.$dataArray[$i].' empty');
+        }
+    }
+    return array('status' => TRUE, 'message' => 'params valid');
+}
+
+/**
+ * validation params
+ * method GET
+ */
+function validation_get_params($dataArray){
+    $ci =& get_instance();
+
+    for($i=0; $i < count($dataArray); $i++){
+        $param = $ci->input->get($dataArray[$i]);
         if(!$param){
             return array('status' => FALSE, 'message' => 'params '.$dataArray[$i].' empty');
         }
