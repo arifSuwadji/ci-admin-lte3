@@ -23,6 +23,14 @@ class Migrate extends CI_Controller {
         }
     }
 
+    public function help(){
+        $result = "Seed Data commands\r\n";
+        $result .= "php index.php migrate status              For status file.\n";
+        $result .= "php index.php migrate version 1           For execute file.\n";
+        $result .= "php index.php migrate version 0 reset     For reset version.\n";
+        echo $result. PHP_EOL;
+    }
+    
     /**
      * Get list file migration & version
      * @return void
