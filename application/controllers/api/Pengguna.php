@@ -10,7 +10,6 @@ class Pengguna extends RestController {
         // Construct the parent class
         parent::__construct();
 
-        $this->load->model("api/ModelPengguna");
     }
 
     public function login_post(){
@@ -81,8 +80,34 @@ class Pengguna extends RestController {
             
             if ( $register['status'] == TRUE ){
                 $idPengguna = $register['pengguna_id'];
+                $pengguna_grup = $register['pengguna_grup'];
                 //insert by grup
-                //sampai sini
+                if($pengguna_grup == 1){
+                    //admin
+                    //nothing to do
+                }else if($pengguna_grup == 2){
+                    //rs
+                    //insert table rumah sakit
+                    $insert = array(
+                        'nama_rumah_sakit' => $nama,
+                        'alamat_rumah_sakit' => $alamat,
+                        'no_hp_rumah_sakit' => $hp,
+                        'email_rumah_sakit' => $email,
+                        'admin_rumah_sakit' => $idPengguna
+                    );
+                    $this->db->insert('rumah_sakit', $insert);
+                }else if($pengguna_grup == 3){
+                    //relawan
+                    //insert table relawan
+                    $insert = array(
+                        'nama_relawan' => $nama,
+                        'alamat_relawan' => $alamat,
+                        'no_hp_relawan' => $hp,
+                        'email_relawan' => $email,
+                        'admin_relawan' => $idPengguna
+                    );
+                    $this->db->insert('relawan', $insert);
+                }
                 
                 // Set the response and exit
                 $response = array(
@@ -106,6 +131,137 @@ class Pengguna extends RestController {
                 'message' => $validate['message'],
                 'token' => ''
             ], 404 );
+        }
+    }
+
+    /**
+     * data pengguna all atau dengan param
+     * Method GET
+     * @params pengguna_id
+     * 
+     */
+    public function index_get(){
+        $token = $this->input->get_request_header('Authorization');
+
+        $validToken = session_mobile($token);
+        if($validToken['status'] == TRUE){
+            $id = $this->get('pengguna_id');
+            if($id){
+                $this->db->where('pengguna_id', $id);
+                $data = $this->db->get('pengguna')->result();
+            }else{
+                $data = $this->db->get('pengguna')->result();
+            }
+            $this->response([
+                'status' => true,
+                'message' => 'data pengguna',
+                'data' => $data,
+            ], 200);
+        }else{
+            $this->response([
+                'status' => false,
+                'message' => 'Authorization failed',
+                'data' => ''
+            ], 404);
+        }
+    }
+
+    /**
+     * update pengguna
+     * method POST params pengguna_id pengguna_grup nama_pengguna username email
+     * @params
+     */
+    public function update_post(){
+        $token = $this->input->get_request_header('Authorization');
+
+        $validToken = session_mobile($token);
+        if($validToken['status'] == TRUE){
+            //validation params
+            $validate = validation_params(array('pengguna_id'));
+            if($validate['status'] == TRUE) {
+                $update = array();
+                $id = $this->post('pengguna_id');
+                $grup = $this->post('pengguna_grup');
+                if($grup) $update['pengguna_grup'] = $grup;
+                $nama_pengguna = $this->post('nama_pengguna');
+                if($nama_pengguna) $update['nama_pengguna'] = $nama_pengguna;
+                $username = $this->post('username');
+                if($username) $update['username'] = $username;
+                $email = $this->post('email');
+                if($email) $update['email'] = $email;
+                $this->db->where('pengguna_id', $id);
+                $forupdate = $this->db->update('pengguna', $update);
+                if ($forupdate) {
+                    $this->response([
+                        'status' => true,
+                        'message' => 'update success',
+                    ], 200);
+                } else {
+                    $this->response([
+                        'status' => false,
+                        'message' => 'update failed',
+                    ], 404);
+                }
+            }else{
+                $this->response( [
+                    'status' => false,
+                    'message' => $validate['message'],
+                    'token' => ''
+                ], 404 );
+            }
+            
+        }else{
+            $this->response([
+                'status' => false,
+                'message' => 'Authorization failed',
+                'data' => ''
+            ], 404);
+        }
+    }
+
+    /**
+     * delete pengguna 
+     * Method POST
+     * @params pengguna_id
+     */
+    public function delete_post(){
+        $token = $this->input->get_request_header('Authorization');
+
+        $validToken = session_mobile($token);
+        if($validToken['status'] == TRUE){
+            //validation params
+            $validate = validation_params(array('pengguna_id'));
+            if($validate['status'] == TRUE) {
+                $id = $this->post('pengguna_id');
+                $this->db->where('pengguna_id', $id);
+                $delete = $this->db->delete('pengguna');
+                if($delete){
+                    $this->response([
+                        'status' => true,
+                        'message' => 'delete success',
+                        'data' => $id
+                    ], 200);
+                }else{
+                    $this->response([
+                        'status' => false,
+                        'message' => 'delete failed',
+                        'data' => $id
+                    ], 404);
+                }
+            }else{
+                $this->response( [
+                    'status' => false,
+                    'message' => $validate['message'],
+                    'token' => ''
+                ], 404 );
+            }
+            
+        }else{
+            $this->response([
+                'status' => false,
+                'message' => 'Authorization failed',
+                'data' => ''
+            ], 404);
         }
     }
 }

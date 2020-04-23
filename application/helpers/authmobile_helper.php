@@ -10,9 +10,8 @@ $table = 'pengguna';
  */
 function login_mobile($email, $password){
     $ci =& get_instance();
-    $ci->load->model('api/ModelPengguna');
 
-    $result = $ci->ModelPengguna->emailPassword($email, $password);
+    $result = $ci->db->get_where('pengguna', array('email' => $email, 'password' => $password))->row();
     if($result){
         $key = $ci->config->config['encryption_key'];
         $payload = array(
@@ -56,7 +55,8 @@ function register_mobile($dataDaftar){
         );
     
         $jwt = JWT::encode($payload, $key);
-        return array('status' => TRUE, 'token' => $jwt, 'pengguna_id' => $idPengguna, 'message' => 'register success');
+        $decoded = JWT::decode($jwt, $key, array('HS256'));
+        return array('status' => TRUE, 'token' => $jwt, 'pengguna_id' => $idPengguna, 'pengguna_grup' => $decoded->pengguna_grup, 'message' => 'register success');
     } catch (\Throwable $th) {
         //throw $th;
         return array('status' => FALSE, 'token' => '', 'message' => 'register failed');
@@ -67,8 +67,11 @@ function register_mobile($dataDaftar){
  * check session token
  */
 function session_mobile($token){
+    $ci =& get_instance();
+    
     $key = $ci->config->config['encryption_key'];
     try {
+        JWT::$leeway = 60; // $leeway in seconds
         $decoded = JWT::decode($token, $key, array('HS256'));
         if($decoded->pengguna_id){
             return array('status' => TRUE, 'user' => $decoded, 'message' => 'token valid');
