@@ -769,7 +769,10 @@ class Model'.$controller.' extends CI_model{
     public function data_'.$table_foreignkey_two.'(){
         return $this->db->get($this->table_'.$table_foreignkey_two.');
     }
+    ';
+    }
 
+    $string .='
     public function getAll(){
         $this->db->select("*");
     ';
@@ -788,7 +791,6 @@ class Model'.$controller.' extends CI_model{
         return $this->db->get();
     }
     ';
-    }
 
     $string .='
     function count'.$controller.'($value){
