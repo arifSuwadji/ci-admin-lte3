@@ -2,7 +2,7 @@
 /**
  * controller function
  */
-function admin_foreignkey_controller($controller, $table, $table_foreignkey_one, $table_foreignkey_two, $buttonTambah, $buttonTambahAksi, $buttonEdit, $buttonEditAksi, $buttonHapus, $buttonPdf, $buttonExcel){
+function admin_foreignkey_controller($controller, $table, $table_foreignkey_one, $table_foreignkey_two, $table_foreignkey_three, $table_foreignkey_four, $table_foreignkey_five, $buttonTambah, $buttonTambahAksi, $buttonEdit, $buttonEditAksi, $buttonHapus, $buttonPdf, $buttonExcel){
         $ci =& get_instance();
         
         $allColumns = AllField($table);
@@ -211,6 +211,24 @@ class ".$controller." extends CI_Controller{
         ';
         }
 
+        if($table_foreignkey_three){
+        $string .='
+                $data["data_'.$table_foreignkey_three.'"] = $this->Model'.$controller.'->data_'.$table_foreignkey_three.'();
+        ';
+        }
+
+        if($table_foreignkey_four){
+        $string .='
+                $data["data_'.$table_foreignkey_four.'"] = $this->Model'.$controller.'->data_'.$table_foreignkey_four.'();
+        ';
+        }
+
+        if($table_foreignkey_five){
+        $string .='
+                $data["data_'.$table_foreignkey_five.'"] = $this->Model'.$controller.'->data_'.$table_foreignkey_five.'();
+        ';
+        }
+
         $string .='
             }
         
@@ -255,6 +273,22 @@ class ".$controller." extends CI_Controller{
             if($table_foreignkey_two){
         $string .='
                 "nama_'.$table_foreignkey_two.'" => $list->nama_'.$table_foreignkey_two.',
+        ';
+            }
+            if($table_foreignkey_three){
+        $string .='
+                "nama_'.$table_foreignkey_three.'" => $list->nama_'.$table_foreignkey_three.',
+        ';
+            }
+
+            if($table_foreignkey_four){
+        $string .='
+                "nama_'.$table_foreignkey_four.'" => $list->nama_'.$table_foreignkey_four.',
+        ';
+            }
+            if($table_foreignkey_five){
+        $string .='
+                "nama_'.$table_foreignkey_five.'" => $list->nama_'.$table_foreignkey_five.',
         ';
             }
         $string .='
@@ -328,6 +362,24 @@ class ".$controller." extends CI_Controller{
         ';
         }
 
+        if($table_foreignkey_three){
+        $string .='
+            $data["data_'.$table_foreignkey_three.'"] = $this->Model'.$controller.'->data_'.$table_foreignkey_three.'();
+        ';
+        }
+
+        if($table_foreignkey_four){
+        $string .='
+            $data["data_'.$table_foreignkey_four.'"] = $this->Model'.$controller.'->data_'.$table_foreignkey_four.'();
+        ';
+        }
+
+        if($table_foreignkey_five){
+        $string .='
+            $data["data_'.$table_foreignkey_five.'"] = $this->Model'.$controller.'->data_'.$table_foreignkey_five.'();
+        ';
+        }
+
         $string .='
         }
         $dataGrup = $this->ModelPengguna->dataGrup();
@@ -388,6 +440,24 @@ class ".$controller." extends CI_Controller{
         if($table_foreignkey_two){
         $string .='
             $data["data_'.$table_foreignkey_two.'"] = $this->Model'.$controller.'->data_'.$table_foreignkey_two.'();
+        ';
+        }
+
+        if($table_foreignkey_three){
+        $string .='
+            $data["data_'.$table_foreignkey_three.'"] = $this->Model'.$controller.'->data_'.$table_foreignkey_three.'();
+        ';
+        }
+
+        if($table_foreignkey_four){
+        $string .='
+            $data["data_'.$table_foreignkey_four.'"] = $this->Model'.$controller.'->data_'.$table_foreignkey_four.'();
+        ';
+        }
+
+        if($table_foreignkey_five){
+        $string .='
+            $data["data_'.$table_foreignkey_five.'"] = $this->Model'.$controller.'->data_'.$table_foreignkey_five.'();
         ';
         }
 
@@ -466,6 +536,24 @@ class ".$controller." extends CI_Controller{
         if($table_foreignkey_two){
         $string .='
                 $data["data_'.$table_foreignkey_two.'"] = $this->Model'.$controller.'->data_'.$table_foreignkey_two.'();
+        ';
+        }
+
+        if($table_foreignkey_three){
+        $string .='
+                $data["data_'.$table_foreignkey_three.'"] = $this->Model'.$controller.'->data_'.$table_foreignkey_three.'();
+        ';
+        }
+
+        if($table_foreignkey_four){
+        $string .='
+                $data["data_'.$table_foreignkey_four.'"] = $this->Model'.$controller.'->data_'.$table_foreignkey_four.'();
+        ';
+        }
+
+        if($table_foreignkey_five){
+        $string .='
+                $data["data_'.$table_foreignkey_five.'"] = $this->Model'.$controller.'->data_'.$table_foreignkey_five.'();
         ';
         }
 
@@ -556,6 +644,24 @@ class ".$controller." extends CI_Controller{
         if($table_foreignkey_two){
         $string .='
             $data["data_'.$table_foreignkey_two.'"] = $this->Model'.$controller.'->data_'.$table_foreignkey_two.'();
+        ';
+        }
+
+        if($table_foreignkey_three){
+        $string .='
+            $data["data_'.$table_foreignkey_three.'"] = $this->Model'.$controller.'->data_'.$table_foreignkey_three.'();
+        ';
+        }
+
+        if($table_foreignkey_four){
+        $string .='
+            $data["data_'.$table_foreignkey_four.'"] = $this->Model'.$controller.'->data_'.$table_foreignkey_four.'();
+        ';
+        }
+
+        if($table_foreignkey_five){
+        $string .='
+            $data["data_'.$table_foreignkey_five.'"] = $this->Model'.$controller.'->data_'.$table_foreignkey_five.'();
         ';
         }
 
@@ -705,7 +811,7 @@ class ".$controller." extends CI_Controller{
 /**
  * model generator
  */
-function model_foreignkey_generator($controller, $table, $table_foreignkey_one, $table_foreignkey_two){
+function model_foreignkey_generator($controller, $table, $table_foreignkey_one, $table_foreignkey_two, $table_foreignkey_three, $table_foreignkey_four, $table_foreignkey_five){
     $ci =& get_instance();
     
     $allColumns = AllField($table);
@@ -726,6 +832,24 @@ function model_foreignkey_generator($controller, $table, $table_foreignkey_one, 
         array_push($dataFilter_foreignkey_two, $fieldName['column_name']);
     }
 
+    $allColumns_foreignkey_three = AllField($table_foreignkey_three);
+    $dataFilter_foreignkey_three = array();
+    foreach($allColumns_foreignkey_three as $fieldName){
+        array_push($dataFilter_foreignkey_three, $fieldName['column_name']);
+    }
+
+    $allColumns_foreignkey_four = AllField($table_foreignkey_four);
+    $dataFilter_foreignkey_four = array();
+    foreach($allColumns_foreignkey_four as $fieldName){
+        array_push($dataFilter_foreignkey_four, $fieldName['column_name']);
+    }
+
+    $allColumns_foreignkey_five = AllField($table_foreignkey_five);
+    $dataFilter_foreignkey_five = array();
+    foreach($allColumns_foreignkey_five as $fieldName){
+        array_push($dataFilter_foreignkey_five, $fieldName['column_name']);
+    }
+
     $string ='<?php
 defined("BASEPATH") OR exit("No direct script access allowed");
 
@@ -742,6 +866,24 @@ class Model'.$controller.' extends CI_model{
     if($table_foreignkey_two){
     $string .='
     private $table_'.$table_foreignkey_two.' = "'.$table_foreignkey_two.'";
+    ';
+    }
+
+    if($table_foreignkey_three){
+    $string .='
+    private $table_'.$table_foreignkey_three.' = "'.$table_foreignkey_three.'";
+    ';
+    }
+
+    if($table_foreignkey_four){
+    $string .='
+    private $table_'.$table_foreignkey_four.' = "'.$table_foreignkey_four.'";
+    ';
+    }
+
+    if($table_foreignkey_five){
+    $string .='
+    private $table_'.$table_foreignkey_five.' = "'.$table_foreignkey_five.'";
     ';
     }
 
@@ -772,6 +914,30 @@ class Model'.$controller.' extends CI_model{
     ';
     }
 
+    if($table_foreignkey_three){
+    $string .='
+    public function data_'.$table_foreignkey_three.'(){
+        return $this->db->get($this->table_'.$table_foreignkey_three.');
+    }
+    ';
+    }
+
+    if($table_foreignkey_four){
+    $string .='
+    public function data_'.$table_foreignkey_four.'(){
+        return $this->db->get($this->table_'.$table_foreignkey_four.');
+    }
+    ';
+    }
+
+    if($table_foreignkey_five){
+    $string .='
+    public function data_'.$table_foreignkey_five.'(){
+        return $this->db->get($this->table_'.$table_foreignkey_five.');
+    }
+    ';
+    }
+
     $string .='
     public function getAll(){
         $this->db->select("*");
@@ -786,6 +952,25 @@ class Model'.$controller.' extends CI_model{
         $this->db->join($this->table_'.$table_foreignkey_two.', "'.$table.'.'.$table_foreignkey_two.' = '.$table_foreignkey_two.'.'.$dataFilter_foreignkey_two[0].'");
     ';
     }
+
+    if($table_foreignkey_three){
+    $string .='
+        $this->db->join($this->table_'.$table_foreignkey_three.', "'.$table.'.'.$table_foreignkey_three.' = '.$table_foreignkey_three.'.'.$dataFilter_foreignkey_three[0].'");
+    ';
+    }
+
+    if($table_foreignkey_four){
+    $string .='
+        $this->db->join($this->table_'.$table_foreignkey_four.', "'.$table.'.'.$table_foreignkey_four.' = '.$table_foreignkey_four.'.'.$dataFilter_foreignkey_four[0].'");
+    ';
+    }
+
+    if($table_foreignkey_five){
+    $string .='
+        $this->db->join($this->table_'.$table_foreignkey_five.', "'.$table.'.'.$table_foreignkey_five.' = '.$table_foreignkey_five.'.'.$dataFilter_foreignkey_five[0].'");
+    ';
+    }
+
     $string .='
         $this->db->from($this->table);
         return $this->db->get();
@@ -802,7 +987,7 @@ class Model'.$controller.' extends CI_model{
     foreach($dataFilter as $fieldName){
     $string .='
             if($arrVal['.$i.']){
-                $arrSearch[\''.$fieldName.'\'] = \'%\'.$arrVal['.$i.'].\'%\';
+                $arrSearch[\''.$fieldName.' like \'] = \'%\'.$arrVal['.$i.'].\'%\';
             }
     ';
         $i++;
@@ -821,6 +1006,21 @@ class Model'.$controller.' extends CI_model{
         $this->db->join($this->table_'.$table_foreignkey_two.', "'.$table.'.'.$table_foreignkey_two.' = '.$table_foreignkey_two.'.'.$dataFilter_foreignkey_two[0].'");
     ';
     }
+    if($table_foreignkey_three){
+    $string .='
+        $this->db->join($this->table_'.$table_foreignkey_three.', "'.$table.'.'.$table_foreignkey_three.' = '.$table_foreignkey_three.'.'.$dataFilter_foreignkey_three[0].'");
+    ';
+    }
+    if($table_foreignkey_four){
+    $string .='
+        $this->db->join($this->table_'.$table_foreignkey_four.', "'.$table.'.'.$table_foreignkey_four.' = '.$table_foreignkey_four.'.'.$dataFilter_foreignkey_four[0].'");
+    ';
+    }
+    if($table_foreignkey_five){
+    $string .='
+        $this->db->join($this->table_'.$table_foreignkey_five.', "'.$table.'.'.$table_foreignkey_five.' = '.$table_foreignkey_five.'.'.$dataFilter_foreignkey_five[0].'");
+    ';
+    }
     $string .='
         $this->db->from($this->table);
         return  $this->db->count_all_results();
@@ -835,7 +1035,7 @@ class Model'.$controller.' extends CI_model{
     foreach($dataFilter as $fieldName){
     $string .='
             if($arrVal['.$i.']){
-                $arrSearch[\''.$fieldName.'\'] = \'%\'.$arrVal['.$i.'].\'%\';
+                $arrSearch[\''.$fieldName.' like \'] = \'%\'.$arrVal['.$i.'].\'%\';
             }
     ';
         $i++;
@@ -865,6 +1065,21 @@ class Model'.$controller.' extends CI_model{
             $this->db->join($this->table_'.$table_foreignkey_two.', "'.$table.'.'.$table_foreignkey_two.' = '.$table_foreignkey_two.'.'.$dataFilter_foreignkey_two[0].'");
     ';
     }
+    if($table_foreignkey_three){
+    $string .='
+            $this->db->join($this->table_'.$table_foreignkey_three.', "'.$table.'.'.$table_foreignkey_three.' = '.$table_foreignkey_three.'.'.$dataFilter_foreignkey_three[0].'");
+    ';
+    }
+    if($table_foreignkey_four){
+    $string .='
+            $this->db->join($this->table_'.$table_foreignkey_four.', "'.$table.'.'.$table_foreignkey_four.' = '.$table_foreignkey_four.'.'.$dataFilter_foreignkey_four[0].'");
+    ';
+    }
+    if($table_foreignkey_five){
+    $string .='
+            $this->db->join($this->table_'.$table_foreignkey_five.', "'.$table.'.'.$table_foreignkey_five.' = '.$table_foreignkey_five.'.'.$dataFilter_foreignkey_five[0].'");
+    ';
+    }
     $string .='
             $this->db->from($this->table);
             return $this->db->limit($length, $start)->get();
@@ -881,6 +1096,21 @@ class Model'.$controller.' extends CI_model{
             $this->db->join($this->table_'.$table_foreignkey_two.', "'.$table.'.'.$table_foreignkey_two.' = '.$table_foreignkey_two.'.'.$dataFilter_foreignkey_two[0].'");
     ';
     }
+    if($table_foreignkey_three){
+    $string .='
+            $this->db->join($this->table_'.$table_foreignkey_three.', "'.$table.'.'.$table_foreignkey_three.' = '.$table_foreignkey_three.'.'.$dataFilter_foreignkey_three[0].'");
+    ';
+    }
+    if($table_foreignkey_four){
+    $string .='
+            $this->db->join($this->table_'.$table_foreignkey_four.', "'.$table.'.'.$table_foreignkey_four.' = '.$table_foreignkey_four.'.'.$dataFilter_foreignkey_four[0].'");
+    ';
+    }
+    if($table_foreignkey_five){
+    $string .='
+            $this->db->join($this->table_'.$table_foreignkey_five.', "'.$table.'.'.$table_foreignkey_five.' = '.$table_foreignkey_five.'.'.$dataFilter_foreignkey_five[0].'");
+    ';
+    }
     $string .='
             $this->db->from($this->table);
             return $this->db->limit($length)->get();
@@ -893,7 +1123,7 @@ class Model'.$controller.' extends CI_model{
     createFile($string, $path);
 }
 
-function template_foreignkey_index($controller, $table, $table_foreignkey_one, $table_foreignkey_two, $buttonTambah, $buttonTambahAksi, $buttonEdit, $buttonEditAksi, $buttonHapus, $buttonPdf, $buttonExcel){
+function template_foreignkey_index($controller, $table, $table_foreignkey_one, $table_foreignkey_two, $table_foreignkey_three, $table_foreignkey_four, $table_foreignkey_five, $buttonTambah, $buttonTambahAksi, $buttonEdit, $buttonEditAksi, $buttonHapus, $buttonPdf, $buttonExcel){
     $ci =& get_instance();
     
     $allColumns = AllField($table);
@@ -912,6 +1142,24 @@ function template_foreignkey_index($controller, $table, $table_foreignkey_one, $
     $dataFilter_foreignkey_two = array();
     foreach($allColumns_foreignkey_two as $fieldName){
         array_push($dataFilter_foreignkey_two, $fieldName['column_name']);
+    }
+
+    $allColumns_foreignkey_three = AllField($table_foreignkey_three);
+    $dataFilter_foreignkey_three = array();
+    foreach($allColumns_foreignkey_three as $fieldName){
+        array_push($dataFilter_foreignkey_three, $fieldName['column_name']);
+    }
+
+    $allColumns_foreignkey_four = AllField($table_foreignkey_four);
+    $dataFilter_foreignkey_four = array();
+    foreach($allColumns_foreignkey_four as $fieldName){
+        array_push($dataFilter_foreignkey_four, $fieldName['column_name']);
+    }
+
+    $allColumns_foreignkey_five = AllField($table_foreignkey_five);
+    $dataFilter_foreignkey_five = array();
+    foreach($allColumns_foreignkey_five as $fieldName){
+        array_push($dataFilter_foreignkey_five, $fieldName['column_name']);
     }
 
     $string ='
@@ -972,6 +1220,42 @@ function template_foreignkey_index($controller, $table, $table_foreignkey_one, $
                 <option></option>
             <?php foreach($data_'.$table_foreignkey_two.'->result() as $'.$table_foreignkey_two.'){ ?>
                 <option value="<?php echo $'.$table_foreignkey_two.'->'.$dataFilter_foreignkey_two[0].' ?>" ><?php echo $'.$table_foreignkey_two.'->'.$dataFilter_foreignkey_two[1].' ?></option>
+            <?php } ?>
+                </select>
+            </div>
+    ';
+        }else if($fieldName == $table_foreignkey_three){
+    $string .='
+            <div class="form-group">
+                <label for="'.$fieldName.'">'.$langField.'</label>
+                <select id="'.$fieldName.'" name="'.$fieldName.'" class="form-control select2" data-placeholder="'.$langField.'">
+                <option></option>
+            <?php foreach($data_'.$table_foreignkey_three.'->result() as $'.$table_foreignkey_three.'){ ?>
+                <option value="<?php echo $'.$table_foreignkey_three.'->'.$dataFilter_foreignkey_three[0].' ?>" ><?php echo $'.$table_foreignkey_three.'->'.$dataFilter_foreignkey_three[1].' ?></option>
+            <?php } ?>
+                </select>
+            </div>
+    ';
+        }else if($fieldName == $table_foreignkey_four){
+    $string .='
+            <div class="form-group">
+                <label for="'.$fieldName.'">'.$langField.'</label>
+                <select id="'.$fieldName.'" name="'.$fieldName.'" class="form-control select2" data-placeholder="'.$langField.'">
+                <option></option>
+            <?php foreach($data_'.$table_foreignkey_four.'->result() as $'.$table_foreignkey_four.'){ ?>
+                <option value="<?php echo $'.$table_foreignkey_four.'->'.$dataFilter_foreignkey_four[0].' ?>" ><?php echo $'.$table_foreignkey_four.'->'.$dataFilter_foreignkey_four[1].' ?></option>
+            <?php } ?>
+                </select>
+            </div>
+    ';
+        }else if($fieldName == $table_foreignkey_five){
+    $string .='
+            <div class="form-group">
+                <label for="'.$fieldName.'">'.$langField.'</label>
+                <select id="'.$fieldName.'" name="'.$fieldName.'" class="form-control select2" data-placeholder="'.$langField.'">
+                <option></option>
+            <?php foreach($data_'.$table_foreignkey_five.'->result() as $'.$table_foreignkey_five.'){ ?>
+                <option value="<?php echo $'.$table_foreignkey_five.'->'.$dataFilter_foreignkey_five[0].' ?>" ><?php echo $'.$table_foreignkey_five.'->'.$dataFilter_foreignkey_five[1].' ?></option>
             <?php } ?>
                 </select>
             </div>
@@ -1046,7 +1330,7 @@ function template_foreignkey_index($controller, $table, $table_foreignkey_one, $
     createFile($string, $path);
 }
 
-function template_foreignkey_tambah($controller, $table, $table_foreignkey_one, $table_foreignkey_two, $buttonTambah, $buttonTambahAksi, $buttonEdit, $buttonEditAksi, $buttonHapus){
+function template_foreignkey_tambah($controller, $table, $table_foreignkey_one, $table_foreignkey_two, $table_foreignkey_three, $table_foreignkey_four, $table_foreignkey_five, $buttonTambah, $buttonTambahAksi, $buttonEdit, $buttonEditAksi, $buttonHapus){
     $ci =& get_instance();
     
     $allColumns = AllField($table);
@@ -1065,6 +1349,24 @@ function template_foreignkey_tambah($controller, $table, $table_foreignkey_one, 
     $dataFilter_foreignkey_two = array();
     foreach($allColumns_foreignkey_two as $fieldName){
         array_push($dataFilter_foreignkey_two, $fieldName['column_name']);
+    }
+
+    $allColumns_foreignkey_three = AllField($table_foreignkey_three);
+    $dataFilter_foreignkey_three = array();
+    foreach($allColumns_foreignkey_three as $fieldName){
+        array_push($dataFilter_foreignkey_three, $fieldName['column_name']);
+    }
+
+    $allColumns_foreignkey_four = AllField($table_foreignkey_four);
+    $dataFilter_foreignkey_four = array();
+    foreach($allColumns_foreignkey_four as $fieldName){
+        array_push($dataFilter_foreignkey_four, $fieldName['column_name']);
+    }
+
+    $allColumns_foreignkey_five = AllField($table_foreignkey_five);
+    $dataFilter_foreignkey_five = array();
+    foreach($allColumns_foreignkey_five as $fieldName){
+        array_push($dataFilter_foreignkey_five, $fieldName['column_name']);
     }
 
     $string ='
@@ -1141,6 +1443,42 @@ function template_foreignkey_tambah($controller, $table, $table_foreignkey_one, 
             </select>
         </div>
     ';
+        }else if($fieldName == $table_foreignkey_three){
+    $string .='
+        <div class="form-group">
+            <label for="'.$fieldName.'">'.$langField.'</label>
+            <select id="'.$fieldName.'" name="'.$fieldName.'" class="form-control select2" data-placeholder="'.$langField.'">
+            <option></option>
+        <?php foreach($data_'.$table_foreignkey_three.'->result() as $'.$table_foreignkey_three.'){ ?>
+            <option value="<?php echo $'.$table_foreignkey_three.'->'.$dataFilter_foreignkey_three[0].' ?>" <?php echo $'.$table_foreignkey_three.'->'.$dataFilter_foreignkey_three[0].' == $'.$fieldName.' ? "selected" : "" ?>><?php echo $'.$table_foreignkey_three.'->'.$dataFilter_foreignkey_three[1].' ?></option>
+        <?php } ?>
+            </select>
+        </div>
+    ';
+        }else if($fieldName == $table_foreignkey_four){
+    $string .='
+        <div class="form-group">
+            <label for="'.$fieldName.'">'.$langField.'</label>
+            <select id="'.$fieldName.'" name="'.$fieldName.'" class="form-control select2" data-placeholder="'.$langField.'">
+            <option></option>
+        <?php foreach($data_'.$table_foreignkey_four.'->result() as $'.$table_foreignkey_four.'){ ?>
+            <option value="<?php echo $'.$table_foreignkey_four.'->'.$dataFilter_foreignkey_four[0].' ?>" <?php echo $'.$table_foreignkey_four.'->'.$dataFilter_foreignkey_four[0].' == $'.$fieldName.' ? "selected" : "" ?>><?php echo $'.$table_foreignkey_four.'->'.$dataFilter_foreignkey_four[1].' ?></option>
+        <?php } ?>
+            </select>
+        </div>
+    ';
+        }else if($fieldName == $table_foreignkey_five){
+    $string .='
+        <div class="form-group">
+            <label for="'.$fieldName.'">'.$langField.'</label>
+            <select id="'.$fieldName.'" name="'.$fieldName.'" class="form-control select2" data-placeholder="'.$langField.'">
+            <option></option>
+        <?php foreach($data_'.$table_foreignkey_five.'->result() as $'.$table_foreignkey_five.'){ ?>
+            <option value="<?php echo $'.$table_foreignkey_five.'->'.$dataFilter_foreignkey_five[0].' ?>" <?php echo $'.$table_foreignkey_five.'->'.$dataFilter_foreignkey_five[0].' == $'.$fieldName.' ? "selected" : "" ?>><?php echo $'.$table_foreignkey_five.'->'.$dataFilter_foreignkey_five[1].' ?></option>
+        <?php } ?>
+            </select>
+        </div>
+    ';
         }else{
     $string .='
         <div class="form-group">
@@ -1169,7 +1507,7 @@ function template_foreignkey_tambah($controller, $table, $table_foreignkey_one, 
     createFile($string, $path);
 }
 
-function template_foreignkey_edit($controller, $table, $table_foreignkey_one, $table_foreignkey_two, $buttonTambah, $buttonTambahAksi, $buttonEdit, $buttonEditAksi, $buttonHapus){
+function template_foreignkey_edit($controller, $table, $table_foreignkey_one, $table_foreignkey_two, $table_foreignkey_three, $table_foreignkey_four, $table_foreignkey_five, $buttonTambah, $buttonTambahAksi, $buttonEdit, $buttonEditAksi, $buttonHapus){
     $ci =& get_instance();
     
     $allColumns = AllField($table);
@@ -1188,6 +1526,24 @@ function template_foreignkey_edit($controller, $table, $table_foreignkey_one, $t
     $dataFilter_foreignkey_two = array();
     foreach($allColumns_foreignkey_two as $fieldName){
         array_push($dataFilter_foreignkey_two, $fieldName['column_name']);
+    }
+
+    $allColumns_foreignkey_three = AllField($table_foreignkey_three);
+    $dataFilter_foreignkey_three = array();
+    foreach($allColumns_foreignkey_three as $fieldName){
+        array_push($dataFilter_foreignkey_three, $fieldName['column_name']);
+    }
+
+    $allColumns_foreignkey_four = AllField($table_foreignkey_four);
+    $dataFilter_foreignkey_four = array();
+    foreach($allColumns_foreignkey_four as $fieldName){
+        array_push($dataFilter_foreignkey_four, $fieldName['column_name']);
+    }
+
+    $allColumns_foreignkey_five = AllField($table_foreignkey_five);
+    $dataFilter_foreignkey_five = array();
+    foreach($allColumns_foreignkey_five as $fieldName){
+        array_push($dataFilter_foreignkey_five, $fieldName['column_name']);
     }
 
     $string ='
@@ -1263,6 +1619,42 @@ function template_foreignkey_edit($controller, $table, $table_foreignkey_one, $t
             <option></option>
         <?php foreach($data_'.$table_foreignkey_two.'->result() as $opt_'.$table_foreignkey_two.'){ ?>
             <option value="<?php echo $opt_'.$table_foreignkey_two.'->'.$dataFilter_foreignkey_two[0].' ?>" <?php echo $opt_'.$table_foreignkey_two.'->'.$dataFilter_foreignkey_two[0].' == $'.$fieldName.' ? "selected" : "" ?>><?php echo $opt_'.$table_foreignkey_two.'->'.$dataFilter_foreignkey_two[1].' ?></option>
+        <?php } ?>
+            </select>
+        </div>
+    ';
+            }else if($fieldName == $table_foreignkey_three){
+    $string .='
+        <div class="form-group">
+            <label for="'.$fieldName.'">'.$langField.'</label>
+            <select id="'.$fieldName.'" name="'.$fieldName.'" class="form-control select2" data-placeholder="'.$langField.'">
+            <option></option>
+        <?php foreach($data_'.$table_foreignkey_three.'->result() as $opt_'.$table_foreignkey_three.'){ ?>
+            <option value="<?php echo $opt_'.$table_foreignkey_three.'->'.$dataFilter_foreignkey_three[0].' ?>" <?php echo $opt_'.$table_foreignkey_three.'->'.$dataFilter_foreignkey_three[0].' == $'.$fieldName.' ? "selected" : "" ?>><?php echo $opt_'.$table_foreignkey_three.'->'.$dataFilter_foreignkey_three[1].' ?></option>
+        <?php } ?>
+            </select>
+        </div>
+    ';
+            }else if($fieldName == $table_foreignkey_four){
+    $string .='
+        <div class="form-group">
+            <label for="'.$fieldName.'">'.$langField.'</label>
+            <select id="'.$fieldName.'" name="'.$fieldName.'" class="form-control select2" data-placeholder="'.$langField.'">
+            <option></option>
+        <?php foreach($data_'.$table_foreignkey_four.'->result() as $opt_'.$table_foreignkey_four.'){ ?>
+            <option value="<?php echo $opt_'.$table_foreignkey_four.'->'.$dataFilter_foreignkey_four[0].' ?>" <?php echo $opt_'.$table_foreignkey_four.'->'.$dataFilter_foreignkey_four[0].' == $'.$fieldName.' ? "selected" : "" ?>><?php echo $opt_'.$table_foreignkey_four.'->'.$dataFilter_foreignkey_four[1].' ?></option>
+        <?php } ?>
+            </select>
+        </div>
+    ';
+            }else if($fieldName == $table_foreignkey_five){
+    $string .='
+        <div class="form-group">
+            <label for="'.$fieldName.'">'.$langField.'</label>
+            <select id="'.$fieldName.'" name="'.$fieldName.'" class="form-control select2" data-placeholder="'.$langField.'">
+            <option></option>
+        <?php foreach($data_'.$table_foreignkey_five.'->result() as $opt_'.$table_foreignkey_five.'){ ?>
+            <option value="<?php echo $opt_'.$table_foreignkey_five.'->'.$dataFilter_foreignkey_five[0].' ?>" <?php echo $opt_'.$table_foreignkey_five.'->'.$dataFilter_foreignkey_five[0].' == $'.$fieldName.' ? "selected" : "" ?>><?php echo $opt_'.$table_foreignkey_five.'->'.$dataFilter_foreignkey_five[1].' ?></option>
         <?php } ?>
             </select>
         </div>
