@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <?php echo asset_icon('AdminLTELogo.png')?>
-  <title>Admin | Data HP</title>
+  <title>Admin | Daftar Presensi</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <?php echo asset_plugin_css('fontawesome-free/css/all.min.css') ?>
@@ -16,7 +16,7 @@
 <body class="hold-transition login-page fixed">
 <div class="login-box">
   <div class="login-logo">
-    <a href="javascript:void(0);"><b>Data HP</b></a>
+    <a href="javascript:void(0);"><b>Daftar Presensi</b></a>
   </div>
   <?php if(validation_errors()){ ?>
     <div class="alert alert-warning alert-dismissible">
