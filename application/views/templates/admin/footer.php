@@ -4,7 +4,7 @@
         <div class="float-right d-none d-sm-block">
         <b>Version</b> 3.0.2
         </div>
-        <strong>Copyright &copy; <?php echo date('Y')?> <a href="<?php echo base_url() ?>">Distribusi-APD</a>.</strong> All rights
+        <strong>Copyright &copy; <?php echo date('Y')?> <a href="<?php echo base_url() ?>">Data-HP</a>.</strong> All rights
         reserved.
     </footer>
 

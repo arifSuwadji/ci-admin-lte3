@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <?php $title= array("Dashboard"); if($menuHalaman){$title = explode('(',$menuHalaman->sub_judul_menu); }?>
   <?php echo asset_icon('AdminLTELogo.png')?>
-  <title>Distribusi APD | <?php echo $title[0] ?></title>
+  <title>Data HP | <?php echo $title[0] ?></title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <?php echo asset_plugin_css('fontawesome-free/css/all.min.css') ?>
@@ -33,16 +33,16 @@
         <li class="nav-item">
             <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
         </li>
-        <li class="nav-item d-none d-sm-inline-block">
+        <!-- <li class="nav-item d-none d-sm-inline-block">
             <a href="<?php echo base_url() ?>" class="nav-link">Home</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
             <a href="#" class="nav-link">Contact</a>
         </li>
-        </ul>
+        </ul> -->
 
         <!-- SEARCH FORM -->
-        <form class="form-inline ml-3">
+        <!-- <form class="form-inline ml-3">
         <div class="input-group input-group-sm">
             <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
             <div class="input-group-append">
@@ -51,20 +51,20 @@
             </button>
             </div>
         </div>
-        </form>
+        </form> -->
 
         <!-- Right navbar links -->
-        <ul class="navbar-nav ml-auto">
+        <!-- <ul class="navbar-nav ml-auto"> -->
         <!-- Messages Dropdown Menu -->
-        <li class="nav-item dropdown">
+        <!-- <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">
             <i class="far fa-comments"></i>
             <span class="badge badge-danger navbar-badge">3</span>
             </a>
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-            <a href="#" class="dropdown-item">
+            <a href="#" class="dropdown-item"> -->
                 <!-- Message Start -->
-                <div class="media">
+                <!-- <div class="media">
                 <?php echo asset_image_chat('user1-128x128.jpg')?>
                 <div class="media-body">
                     <h3 class="dropdown-item-title">
@@ -74,13 +74,13 @@
                     <p class="text-sm">Call me whenever you can...</p>
                     <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
                 </div>
-                </div>
+                </div> -->
                 <!-- Message End -->
-            </a>
+            <!-- </a>
             <div class="dropdown-divider"></div>
-            <a href="#" class="dropdown-item">
+            <a href="#" class="dropdown-item"> -->
                 <!-- Message Start -->
-                <div class="media">
+                <!-- <div class="media">
                 <?php echo asset_image_chat('user8-128x128.jpg')?>
                 <div class="media-body">
                     <h3 class="dropdown-item-title">
@@ -90,13 +90,13 @@
                     <p class="text-sm">I got your message bro</p>
                     <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
                 </div>
-                </div>
+                </div> -->
                 <!-- Message End -->
-            </a>
+            <!-- </a>
             <div class="dropdown-divider"></div>
-            <a href="#" class="dropdown-item">
+            <a href="#" class="dropdown-item"> -->
                 <!-- Message Start -->
-                <div class="media">
+                <!-- <div class="media">
                 <?php echo asset_image_chat('user3-128x128.jpg')?>
                 <div class="media-body">
                     <h3 class="dropdown-item-title">
@@ -106,15 +106,15 @@
                     <p class="text-sm">The subject goes here</p>
                     <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
                 </div>
-                </div>
+                </div> -->
                 <!-- Message End -->
-            </a>
+            <!-- </a>
             <div class="dropdown-divider"></div>
             <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
             </div>
-        </li>
+        </li> -->
         <!-- Notifications Dropdown Menu -->
-        <li class="nav-item dropdown">
+        <!-- <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">
             <i class="far fa-bell"></i>
             <span class="badge badge-warning navbar-badge">15</span>
@@ -144,7 +144,7 @@
             <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#">
             <i class="fas fa-th-large"></i>
             </a>
-        </li>
+        </li> -->
         </ul>
     </nav>
     <!-- /.navbar -->

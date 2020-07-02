@@ -42,6 +42,22 @@ let table = $('#tableData').DataTable({
           }
       }}
     ],
+    language: {
+        "searchPlaceholder": "Cari ",
+        "sSearch": "",
+        "lengthMenu": "&emsp;Menampilkan _MENU_ per halaman",
+        "processing": "<span class='fa fa-spinner fa-spin fa-lg'></span><br>Memproses data...",
+        "info": "&emsp;Menampilkan _START_ - _END_ dari _TOTAL_ data",
+        "zeroRecords": "Maaf - tidak ada yang ditemukan",
+        "infoEmpty": "&emsp;Tidak ada data yang tersedia",
+        "infoFiltered": "&emsp;(filter dari _MAX_ total data)",
+        "paginate": {
+            "first": "Pertama",
+            "last": "Terakhir",
+            "next": "Selanjutnya",
+            "previous": "Sebelumnya"
+        },
+    },
   });
 
 table.on( 'order.dt search.dt', function () {

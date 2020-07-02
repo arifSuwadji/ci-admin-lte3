@@ -42,7 +42,7 @@ class Login extends CI_controller {
                 $dataSession['email'] = $row['email'];
                 $dataSession['username'] = $row['username'];
                 $dataSession['fileExcel'] = '';
-                $this->session->set_userdata('adminDistribusi', $dataSession);
+                $this->session->set_userdata('adminDataHp', $dataSession);
                 $this->db->where('pengguna', $row['pengguna_id']);
                 redirect(base_url().'admin');
             }else{

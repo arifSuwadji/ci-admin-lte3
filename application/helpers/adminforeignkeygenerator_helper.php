@@ -795,7 +795,7 @@ class ".$controller." extends CI_Controller{
         $string .='
             ]);
         }
-        $filename=$title[0]." ".date("d-m-Y")." - DistribusiAPD.xlsx";
+        $filename=$title[0]." ".date("d-m-Y")." - datahp.xlsx";
         $this->excelgenerator->generate($header, $content, $filename, "'.$table.'");
     }
 
@@ -1293,7 +1293,7 @@ function template_foreignkey_index($controller, $table, $table_foreignkey_one, $
               <input type="hidden" id="editData" value="<?php echo $editData ?>"/>
               <input type="hidden" id="hapusJson" value="<?php echo $hapusData ?>"/>
               <input type="hidden" id="adminGrup" value="<?php echo $pengguna_grup ?>"/>
-              <input type="hidden" id="sessionIdAdmin" value="<?php echo $this->session->userdata["adminDistribusi"]["pengguna_id"]?>">
+              <input type="hidden" id="sessionIdAdmin" value="<?php echo $this->session->userdata["adminDataHp"]["pengguna_id"]?>">
             </div>
             <br>
             <!--card header-->
@@ -1706,7 +1706,7 @@ function template_foreignkey_pdf($controller, $table){
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <?php $title= array("Dashboard"); if($menuHalaman){$title = explode("(",$menuHalaman->sub_judul_menu); }?>
-  <title>Distribusi APD | <?php echo $title[0] ?></title>
+  <title>Data HP | <?php echo $title[0] ?></title>
   <?php echo asset_icon("AdminLTELogo.png")?>
   <?php echo asset_plugin_css("tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css") ?>
   <?php echo asset_css("adminlte.min.css") ?>
@@ -1849,6 +1849,23 @@ let table = $("#tableData").DataTable({
               </div>`;
   }}
 ],
+language: {
+    "searchPlaceholder": "Cari ",
+    "sSearch": "",
+    "lengthMenu": "&emsp;Menampilkan _MENU_ per halaman",
+    "processing": "<span class=\'fa fa-spinner fa-spin fa-lg\'></span><br>Memproses data...",
+    "info": "&emsp;Menampilkan _START_ - _END_ dari _TOTAL_ data",
+    "zeroRecords": "Maaf - tidak ada yang ditemukan",
+    "infoEmpty": "&emsp;Tidak ada data yang tersedia",
+    "infoFiltered": "&emsp;(filter dari _MAX_ total data)",
+    "paginate": {
+        "first": "Pertama",
+        "last": "Terakhir",
+        "next": "Selanjutnya",
+        "previous": "Sebelumnya"
+    },
+
+},
 });
 
 table.on( "order.dt search.dt", function () {
