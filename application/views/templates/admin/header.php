@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <?php $title= array("Dashboard"); if($menuHalaman){$title = explode('(',$menuHalaman->sub_judul_menu); }?>
   <?php echo asset_icon('AdminLTELogo.png')?>
-  <title>Daftar Presensi | <?php echo $title[0] ?></title>
+  <title>PJJ Kuttab | <?php echo $title[0] ?></title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <?php echo asset_plugin_css('fontawesome-free/css/all.min.css') ?>

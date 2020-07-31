@@ -31,15 +31,32 @@ let table = $('#tableData').DataTable({
           }
       }},
       { "mRender": function(data, type, full){
-          if(full[10] && full[12]){
-              return '<div class="btn-group dropleft"><button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="fa fa-ellipsis-v"></span></button><div class="dropdown-menu" aria-labelledby="dropdownMenuLink"><a class="dropdown-item" href="javascript:void(0);" onClick="editData('+full['pengguna_id']+')"><button class="btn btn-warning btn-block btn-sm text-bold">Edit</button></a>&emsp;&emsp;<a class="dropdown-item" href="javascript:void(0);" onClick="hapusData('+full['pengguna_id']+')"><button class="btn btn-danger btn-block btn-sm text-bold">Hapus</button></a></div></div>';
-          }else if(!full[10] && full[12]){
-              return '<div class="btn-group dropleft"><button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="fa fa-ellipsis-v"></span></button><div class="dropdown-menu" aria-labelledby="dropdownMenuLink"><a class="dropdown-item" href="javascript:void(0);" onClick="javascript:void(0)"><button class="btn btn-default btn-sm text-bold" disabled>Edit</button></a>&emsp;&emsp;<a class="dropdown-item" href="javascript:void(0);" onClick="hapusData('+full['pengguna_id']+')"><button class="btn btn-danger btn-block btn-sm text-bold">Hapus</button></a></div></div>';
-          }else if(full[10] && !full[12]){
-            return '<div class="btn-group dropleft"><button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="fa fa-ellipsis-v"></span></button><div class="dropdown-menu" aria-labelledby="dropdownMenuLink"><a class="dropdown-item" href="javascript:void(0);" onClick="editData('+full['pengguna_id']+')"><button class="btn btn-warning btn-block btn-sm text-bold">Edit</button></a>&emsp;&emsp;<a class="dropdown-item" href="javascript:void(0);" onClick="javascript:void(0)"><button class="btn btn-default btn-sm text-bold" disabled>Hapus</button></a></div></div>';
-          }else if(!full[10] && !full[12]){
-            return '<div class="btn-group dropleft"><button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="fa fa-ellipsis-v"></span></button><div class="dropdown-menu" aria-labelledby="dropdownMenuLink"><a class="dropdown-item" href="javascript:void(0);" onClick="javascript:void(0);"><button class="btn btn-default btn-sm text-bold" disabled>Edit</button></a>&emsp;&emsp;<a class="dropdown-item" href="javascript:void(0);" onClick="javascript:void(0)"><button class="btn btn-default btn-sm text-bold" disabled>Hapus</button></a></div></div>';
+          let aksesEdit = ""; let aksesHapus = "";
+          let editData = `editData(${full['pengguna_id']})`;
+          let hapusData = `hapusData(${full['pengguna_id']})`;
+          let colorButtonEdit = "btn-warning";
+          let colorButtonHapus = "btn-danger";
+          if(!full[10]){
+              aksesEdit = "disabled";
+              editData = "";
+              colorButtonEdit = "btn-default";
           }
+          if(!full[12]){
+              aksesHapus = "disabled";
+              hapusData = "";
+              colorButtonHapus = "btn-default";
+          }
+          return `<div class="btn-group dropleft">
+                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="fa fa-ellipsis-v"></span></button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <a class="dropdown-item" href="javascript:void(0);" onClick="${editData}">
+                            <button class="btn ${colorButtonEdit} btn-block btn-sm text-bold ${aksesEdit}">Edit</button>
+                        </a>
+                        <a class="dropdown-item" href="javascript:void(0);" onClick="${hapusData}">
+                            <button class="btn ${colorButtonHapus} btn-block btn-sm text-bold ${aksesHapus}">Hapus</button>
+                        </a>
+                    </div>
+                </div>`;
       }}
     ],
     language: {
