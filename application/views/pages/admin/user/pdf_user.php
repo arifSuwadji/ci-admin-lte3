@@ -2,7 +2,7 @@
 <html>
 <head>
   <?php $title= array("Dashboard"); if($menuHalaman){$title = explode('(',$menuHalaman->sub_judul_menu); }?>
-  <title>PJJ Kuttab | <?php echo $title[0] ?></title>
+  <title>Payroll Carstore | <?php echo $title[0] ?></title>
   <?php echo asset_icon('AdminLTELogo.png')?>
   <?php echo asset_plugin_css('tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') ?>
   <?php echo asset_css('adminlte.min.css') ?>
