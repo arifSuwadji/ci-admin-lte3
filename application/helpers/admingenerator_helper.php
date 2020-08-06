@@ -711,7 +711,7 @@ function template_index($controller, $table, $buttonTambah, $buttonTambahAksi, $
         <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="javascript:void(0)"><i class="<?php echo $menuHalaman->icon_menu ?>"></i> <?php echo $menuHalaman->judul_menu ?></a></li>
-            <li class="breadcrumb-item active">Data <?php echo $menuHalaman->sub_judul_menu ?></li>
+            <li class="breadcrumb-item active"><?php echo $menuHalaman->sub_judul_menu ?></li>
             </ol>
         </div>
         </div>
