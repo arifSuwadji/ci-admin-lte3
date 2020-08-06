@@ -1285,7 +1285,7 @@ function template_foreignkey_index($controller, $table, $table_foreignkey_one, $
               <h3 class="card-title"><?php echo $menuHalaman->sub_judul_menu ?></h3>
               <div class="float-right">
               <?php if(isset($priviliges->{'.$buttonTambah.'})){ ?><a href="<?php echo $tambahData ?>"><button class="btn btn-primary btn-sm text-bold">Tambah '.ucwords(str_replace('_',' ', $table)).'</button></a><?php }else{?><button class="btn btn-default btn-sm text-bold" disabled>Tambah '.ucwords(str_replace('_',' ', $table)).'</button><?php } ?>
-              <?php if(isset($priviliges->{'.$buttonPdf.'})){ ?><a href="<?php echo $exportpdf ?>"><button class="btn btn-info btn-sm text-bold" ><i class="fas fa-file-pdf"></i> PDF</button><a><?php }else{?><button class="btn btn-default btn-sm text-bold" disabled><i class="fas fa-file-pdf"></i> PDF</button><?php } ?>
+              <?php if(isset($priviliges->{'.$buttonPdf.'})){ ?><a href="<?php echo $exportpdf ?>" target="_blank"><button class="btn btn-info btn-sm text-bold" ><i class="fas fa-file-pdf"></i> PDF</button><a><?php }else{?><button class="btn btn-default btn-sm text-bold" disabled><i class="fas fa-file-pdf"></i> PDF</button><?php } ?>
               <?php if(isset($priviliges->{'.$buttonExcel.'})){ ?><a href="<?php echo $exportexcel ?>"><button class="btn btn-info btn-sm text-bold" ><i class="fas fa-file-excel"></i> Excel</button><a><?php }else{?><button class="btn btn-default btn-sm text-bold" disabled><i class="fas fa-file-excel"></i> Excel</button><?php } ?>
               </div>
 
