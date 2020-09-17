@@ -31,4 +31,29 @@ function asset_logo($value=''){
 function asset_image_profile($value=''){
     return '<img src="'.base_url('public/admin/lte3/dist/img/'.$value).'" class="img-circle elevation-2" alt="User Image">';
 }
+
+function default_asset_icon($value='', $rel=''){
+    return '<link href="'.base_url("public/default/assets/img/".$value).'" rel="'.$rel.'"/>';
+}
+
+function default_asset_css($value=''){
+    return '<link rel="stylesheet" href="'.base_url("public/default/assets/css/".$value).'"/>';
+}
+
+function default_vendor_css($value=''){
+    return '<link href="'.base_url("public/default/assets/vendor/".$value).'" rel="stylesheet">';
+}
+
+function default_asset_js($value=''){
+    return '<script type="text/javascript" src="'.base_url("public/default/assets/js/".$value).'"></script>';
+}
+
+function default_vendor_js($value=''){
+    return '<script type="text/javascript" src="'.base_url("public/default/assets/vendor/".$value).'"></script>';
+}
+
+function default_img($value='', $animation=''){
+    return '<img src="'.base_url("public/default/assets/img/".$value).'" class="img-fluid '.$animation.'" alt="">';
+}
+
 ?>

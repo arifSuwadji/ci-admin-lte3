@@ -9,14 +9,23 @@ function template_admin($content, $data){
     $ci->load->view("templates/admin/footer", $data);
 }
 
+function template_default($content, $data){
+    $ci =& get_instance();
+    
+    $ci->load->view("templates/default/header", $data);
+    $ci->load->view("templates/default/menu", $data);
+    $ci->load->view("pages/default/".$content, $data);
+    $ci->load->view("templates/default/footer", $data);
+}
+
 function is_login(){
     $ci =& get_instance();
     
-    if(isset($ci->session->userdata['adminPayroll'])){
-        if($ci->session->userdata['adminPayroll']['fileExcel'] == ''){
+    if(isset($ci->session->userdata['adminEkta'])){
+        if($ci->session->userdata['adminEkta']['fileExcel'] == ''){
         }else{
-            unlink($ci->session->userdata['adminPayroll']['fileExcel']);
-            $ci->session->userdata['adminPayroll']['fileExcel'] = '';
+            unlink($ci->session->userdata['adminEkta']['fileExcel']);
+            $ci->session->userdata['adminEkta']['fileExcel'] = '';
         }
     }else{
         $data = array();
@@ -30,12 +39,12 @@ function is_login(){
 function is_logout(){
     $ci =& get_instance();
     
-    $ci->db->where('pengguna', $ci->session->userdata['adminPayroll']['pengguna_id']);
+    $ci->db->where('pengguna', $ci->session->userdata['adminEkta']['pengguna_id']);
     $sess_data = array(
         'pengguna_id' => '',
         'nama_pengguna' => '',
     );
-    $ci->session->unset_userdata('adminPayroll', $sess_data);
+    $ci->session->unset_userdata('adminEkta', $sess_data);
     redirect(base_url().'admin');
 }
 
@@ -73,8 +82,8 @@ function data_admin($model){
     $ci =& get_instance();
     
     $row = 0;
-    if(isset($ci->session->userdata['adminPayroll'])){
-        $row = $model->idAdmin($ci->session->userdata['adminPayroll']['pengguna_id']);
+    if(isset($ci->session->userdata['adminEkta'])){
+        $row = $model->idAdmin($ci->session->userdata['adminEkta']['pengguna_id']);
     }
     return $row;
 }

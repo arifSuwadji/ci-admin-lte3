@@ -4,7 +4,7 @@
     <!-- Brand Logo -->
     <a href="<?php echo base_url() ?>" class="brand-link">
     <?php echo asset_logo('AdminLTELogo.png')?>
-    <span class="brand-text font-weight-light">Payroll</span>
+    <span class="brand-text font-weight-light">e-KTA</span>
     </a>
     
     <!-- Sidebar -->

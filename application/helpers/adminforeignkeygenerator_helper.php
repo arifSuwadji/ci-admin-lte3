@@ -480,6 +480,7 @@ class ".$controller." extends CI_Controller{
             $errmsg = "";
             $this->db->affected_rows() != 1 ? $errmsg = "gagal" : $errmsg = "berhasil";
             if($errmsg == "gagal"){
+                $errmsg = \'Tidak data yang ditambahkan\';
         ';
         $string .='
                 redirect(base_url()."admin/tambah'.$controller.'?errmsg=".$errmsg
@@ -491,6 +492,13 @@ class ".$controller." extends CI_Controller{
         $string .='
                 );
             }else if($errmsg == "berhasil"){
+                $this->session->set_flashdata(\'message\', \'<script>Swal.fire({
+                    position: "top-end",
+                    type: "success",
+                    title: "Data telah ditambahkan",
+                    showConfirmButton: false,
+                    timer: 3000
+                });</script>\');
                 redirect(base_url()."admin/'.$controller.'");
             }
         }
@@ -705,6 +713,7 @@ class ".$controller." extends CI_Controller{
             $errmsg = "";
             $this->db->affected_rows() != 1 ? $errmsg = "gagal" : $errmsg = "berhasil";
             if($errmsg == "gagal"){
+                $errmsg = \'Tidak ada data yang diperbarui\';
         ';
         $string .='
                 redirect(base_url()."admin/edit'.$controller.'/$this->input->post(\''.$dataFilter[0].'_edit\')?errmsg=".$errmsg
@@ -716,6 +725,13 @@ class ".$controller." extends CI_Controller{
         $string .='
                 );
             }else if($errmsg == "berhasil"){
+                $this->session->set_flashdata(\'message\', \'<script>Swal.fire({
+                    position: "top-end",
+                    type: "success",
+                    title: "Data telah diperbarui",
+                    showConfirmButton: false,
+                    timer: 3000
+                });</script>\');
                 redirect(base_url()."admin/'.$controller.'");
             }
         }
@@ -795,7 +811,7 @@ class ".$controller." extends CI_Controller{
         $string .='
             ]);
         }
-        $filename=$title[0]." ".date("d-m-Y")." - payroll.xlsx";
+        $filename=$title[0]." ".date("d-m-Y")." - eKta.xlsx";
         $this->excelgenerator->generate($header, $content, $filename, "'.$table.'");
     }
 
@@ -1293,7 +1309,7 @@ function template_foreignkey_index($controller, $table, $table_foreignkey_one, $
               <input type="hidden" id="editData" value="<?php echo $editData ?>"/>
               <input type="hidden" id="hapusJson" value="<?php echo $hapusData ?>"/>
               <input type="hidden" id="adminGrup" value="<?php echo $pengguna_grup ?>"/>
-              <input type="hidden" id="sessionIdAdmin" value="<?php echo $this->session->userdata["adminPayroll"]["pengguna_id"]?>">
+              <input type="hidden" id="sessionIdAdmin" value="<?php echo $this->session->userdata["adminEkta"]["pengguna_id"]?>">
             </div>
             <br>
             <!--card header-->
@@ -1706,7 +1722,7 @@ function template_foreignkey_pdf($controller, $table){
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <?php $title= array("Dashboard"); if($menuHalaman){$title = explode("(",$menuHalaman->sub_judul_menu); }?>
-  <title>Payroll Carstore | <?php echo $title[0] ?></title>
+  <title>e-KTA DPD PKS | <?php echo $title[0] ?></title>
   <?php echo asset_icon("AdminLTELogo.png")?>
   <?php echo asset_plugin_css("tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css") ?>
   <?php echo asset_css("adminlte.min.css") ?>

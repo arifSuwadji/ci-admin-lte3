@@ -28,7 +28,7 @@
             <input type="hidden" id="hapusJson" value="<?php echo $hapusData ?>"/>
             <input type="hidden" id="gantiPassword" value="<?php echo $gantiPassword ?>"/>
             <input type="hidden" id="adminGrup" value="<?php echo $pengguna_grup ?>"/>
-            <input type="hidden" id="sessionIdAdmin" value="<?php echo $this->session->userdata['adminPayroll']['pengguna_id']?>">
+            <input type="hidden" id="sessionIdAdmin" value="<?php echo $this->session->userdata['adminEkta']['pengguna_id']?>">
           </div>
           <br>
           <!--card header-->

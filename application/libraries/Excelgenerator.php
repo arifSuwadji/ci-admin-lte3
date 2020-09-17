@@ -64,7 +64,7 @@ class ExcelGenerator{
         //download file
         header("Location: ".base_url().'download/'.$filename);
         $filepath = FCPATH."download/" . $filename;
-        $ci->session->userdata['adminPayroll']['fileExcel'] = $filepath;
+        $ci->session->userdata['adminEkta']['fileExcel'] = $filepath;
         exit;
     }
 }

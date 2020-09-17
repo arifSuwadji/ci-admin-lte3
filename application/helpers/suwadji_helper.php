@@ -44,4 +44,16 @@ function dateText($date){
     return date('d', strtotime($date))." ".nameMonth(date('m', strtotime($date)))." ".date('Y', strtotime($date));
 }
 
+// This function will return a random 
+// string of specified length 
+function random_image_name($length_of_string) { 
+  
+    // String of all alphanumeric character 
+    $str_result = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'; 
+  
+    // Shufle the $str_result and returns substring 
+    // of specified length 
+    return substr(str_shuffle($str_result), 0, $length_of_string); 
+}
+
 ?>

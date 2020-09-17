@@ -4,7 +4,7 @@
         <div class="float-right d-none d-sm-block">
         <b>Version</b> 3.0.2
         </div>
-        <strong>Copyright &copy; <?php echo date('Y')?> <a href="<?php echo base_url() ?>">Payroll-Carstore</a>.</strong> All rights
+        <strong>Copyright &copy; <?php echo date('Y')?> <a href="<?php echo base_url() ?>">e-KTA DPD PKS</a>.</strong> All rights
         reserved.
     </footer>
 
@@ -33,6 +33,7 @@
 <?php echo asset_js('adminlte.min.js')?>
 <?php echo asset_js('demo.js')?>
 <?php echo asset_plugin_js('icheck/icheck.min.js')?>
+<?php echo $this->session->flashdata('message');?>
 <!-- Page script -->
 <script>
   $(function () {
