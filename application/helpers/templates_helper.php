@@ -21,11 +21,11 @@ function template_default($content, $data){
 function is_login(){
     $ci =& get_instance();
     
-    if(isset($ci->session->userdata['adminEkta'])){
-        if($ci->session->userdata['adminEkta']['fileExcel'] == ''){
+    if(isset($ci->session->userdata['adminDonasi'])){
+        if($ci->session->userdata['adminDonasi']['fileExcel'] == ''){
         }else{
-            unlink($ci->session->userdata['adminEkta']['fileExcel']);
-            $ci->session->userdata['adminEkta']['fileExcel'] = '';
+            unlink($ci->session->userdata['adminDonasi']['fileExcel']);
+            $ci->session->userdata['adminDonasi']['fileExcel'] = '';
         }
     }else{
         $data = array();
@@ -39,12 +39,12 @@ function is_login(){
 function is_logout(){
     $ci =& get_instance();
     
-    $ci->db->where('pengguna', $ci->session->userdata['adminEkta']['pengguna_id']);
+    $ci->db->where('pengguna', $ci->session->userdata['adminDonasi']['pengguna_id']);
     $sess_data = array(
         'pengguna_id' => '',
         'nama_pengguna' => '',
     );
-    $ci->session->unset_userdata('adminEkta', $sess_data);
+    $ci->session->unset_userdata('adminDonasi', $sess_data);
     redirect(base_url().'admin');
 }
 
@@ -82,8 +82,8 @@ function data_admin($model){
     $ci =& get_instance();
     
     $row = 0;
-    if(isset($ci->session->userdata['adminEkta'])){
-        $row = $model->idAdmin($ci->session->userdata['adminEkta']['pengguna_id']);
+    if(isset($ci->session->userdata['adminDonasi'])){
+        $row = $model->idAdmin($ci->session->userdata['adminDonasi']['pengguna_id']);
     }
     return $row;
 }

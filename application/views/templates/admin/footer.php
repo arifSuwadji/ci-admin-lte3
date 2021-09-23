@@ -2,9 +2,9 @@
     <!-- /.content-wrapper -->
     <footer class="main-footer">
         <div class="float-right d-none d-sm-block">
-        <b>Version</b> 3.0.2
+        <b>Version</b> 1.0.0
         </div>
-        <strong>Copyright &copy; <?php echo date('Y')?> <a href="<?php echo base_url() ?>">e-KTA DPD PKS</a>.</strong> All rights
+        <strong>Copyright &copy; <?php echo date('Y')?> <a href="<?php echo base_url() ?>">Aplikasi Donasi Kader</a>.</strong> All rights
         reserved.
     </footer>
 

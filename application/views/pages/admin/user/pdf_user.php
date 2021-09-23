@@ -2,14 +2,31 @@
 <html>
 <head>
   <?php $title= array("Dashboard"); if($menuHalaman){$title = explode('(',$menuHalaman->sub_judul_menu); }?>
-  <title>e-KTA DPD PKS | <?php echo $title[0] ?></title>
+  <title>Aplikasi Donasi Kader | <?php echo $title[0] ?></title>
   <?php echo asset_icon('AdminLTELogo.png')?>
   <?php echo asset_plugin_css('tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') ?>
   <?php echo asset_css('adminlte.min.css') ?>
+  <style>
+    table, td, th {
+        border: 1px solid black;
+    }
+    
+    td, th {
+        padding-top: 10px;
+        padding-bottom: 5px;
+        padding-left: 3px;
+        padding-right: 3px;
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+  </style>
 </head>
 <body style="font-size:12px;">
 	<div >
-        <div class="float-right">
+        <div style="text-align:right;" class="float-right">
             <br><?php if($menuHalaman){$title = explode('(',$menuHalaman->sub_judul_menu); } echo $title[0] ?>,  <?php echo dateText(date("d-m-Y")) ?>
         </div>
         <br>
@@ -27,7 +44,7 @@
                 <?php $no=1; ?>
                 <?php foreach($users->result() as $user): ?>
                 <tr style="line-height: 6px;">
-                    <td><?php echo $no; ?></td>
+                    <td style="text-align:right;"><?php echo $no; ?></td>
                     <td><?php echo $user->nama_pengguna; ?></td>
                     <td><?php echo $user->email; ?></td>
                     <td><?php echo $user->nama_grup; ?></td>

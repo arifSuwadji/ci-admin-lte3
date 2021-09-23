@@ -625,7 +625,7 @@ class ".$controller." extends CI_Controller{
         $string .='
             ]);
         }
-        $filename=$title[0]." ".date("d-m-Y")." - eKta.xlsx";
+        $filename=$title[0]." ".date("d-m-Y")." - donasiKader.xlsx";
         $this->excelgenerator->generate($header, $content, $filename, "'.$table.'");
     }
         
@@ -750,7 +750,7 @@ function template_index($controller, $table, $buttonTambah, $buttonTambahAksi, $
               <input type="hidden" id="editData" value="<?php echo $editData ?>"/>
               <input type="hidden" id="hapusJson" value="<?php echo $hapusData ?>"/>
               <input type="hidden" id="adminGrup" value="<?php echo $pengguna_grup ?>"/>
-              <input type="hidden" id="sessionIdAdmin" value="<?php echo $this->session->userdata["adminEkta"]["pengguna_id"]?>">
+              <input type="hidden" id="sessionIdAdmin" value="<?php echo $this->session->userdata["adminDonasi"]["pengguna_id"]?>">
             </div>
             <br>
             <!--card header-->
@@ -977,7 +977,7 @@ function template_pdf($controller, $table){
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <?php $title= array("Dashboard"); if($menuHalaman){$title = explode("(",$menuHalaman->sub_judul_menu); }?>
-  <title>e-KTA DPD PKS | <?php echo $title[0] ?></title>
+  <title>Aplikasi Donasi Kader | <?php echo $title[0] ?></title>
   <?php echo asset_icon("AdminLTELogo.png")?>
   <?php echo asset_plugin_css("tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css") ?>
   <?php echo asset_css("adminlte.min.css") ?>

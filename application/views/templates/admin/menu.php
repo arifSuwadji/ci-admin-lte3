@@ -4,7 +4,7 @@
     <!-- Brand Logo -->
     <a href="<?php echo base_url() ?>" class="brand-link">
     <?php echo asset_logo('AdminLTELogo.png')?>
-    <span class="brand-text font-weight-light">e-KTA</span>
+    <span class="brand-text font-weight-light">ADK</span>
     </a>
     
     <!-- Sidebar -->
@@ -52,8 +52,17 @@
                     $activeArrayUrl[$url] = $url;
                 }
             ?>
-            <li class="nav-item has-treeview <?php echo $current_url == array_search($current_url, $activeArrayUrl) ? 'menu-open': $icon_menu == array_search($icon_menu, $activeArrayIcon) ? 'menu-open': '' ?>">
-                <a href="javascript:void(0)" class="nav-link <?php echo $current_url == array_search($current_url, $activeArrayUrl) ? 'active': $icon_menu == array_search($icon_menu, $activeArrayIcon) ? 'active': '' ?>">
+            <?php
+                $menu_open = ''; $active = '';
+                if($current_url == array_search($current_url, $activeArrayUrl)){
+                    $menu_open = 'menu-open';
+                    $active = 'active';
+                }else if ($icon_menu == array_search($icon_menu, $activeArrayIcon)){
+                    $menu_open = 'menu-open';
+                    $active = 'active';
+                }?>
+            <li class="nav-item has-treeview <?php echo $menu_open ?>">
+                <a href="javascript:void(0)" class="nav-link <?php echo $active ?>">
                 <i class="<?php echo $priv->icon_menu ?>"></i>
                 <p>
                     <?php echo ucfirst($priv->judul_menu) ?>
@@ -66,8 +75,15 @@
                     foreach($arrayMenu as $menu){
                     $arrayList = explode('_', $menu);
                 ?>
+                <?php 
+                    $active_nav = '';
+                    if($current_url == $arrayList[1]){
+                        $active_nav = 'active';
+                    } else if($icon_menu == $arrayList[0]){
+                        $active_nav = 'active';
+                    } ?>
                     <li class="nav-item">
-                        <a href="<?php echo base_url($arrayList[1]) ?>" class="nav-link <?php echo $current_url == $arrayList[1] ? 'active': $icon_menu == $arrayList[0] ? 'active': '' ?>">
+                        <a href="<?php echo base_url($arrayList[1]) ?>" class="nav-link <?php echo $active_nav ?>">
                         <i class="<?php echo $arrayList[0] ?>"></i>
                         <p><?php echo $arrayList[2] ?></p>
                         </a>
@@ -75,9 +91,16 @@
                 <?php } ?>
                 </ul>
             </li>
-            <?php }else{ ?>
+            <?php }else{ 
+                $active_nav_seq = '';
+                if($current_url == $priv->url_menu){
+                    $active_nav_seq = 'active';
+                } else if ($icon_menu == $priv->icon_menu){
+                    $active_nav_seq = 'active';
+                }
+            ?>
             <li class="nav-item">
-                <a href="<?php echo base_url($priv->url_menu) ?>" class="nav-link <?php echo $current_url == $priv->url_menu ? 'active': $icon_menu == $priv->icon_menu ? 'active': '' ?>">
+                <a href="<?php echo base_url($priv->url_menu) ?>" class="nav-link <?php echo $active_nav_seq ?>">
                 <i class="<?php echo $priv->icon_menu ?>"></i> 
                 <p><?php echo $priv->sub_judul_menu ?></p>
                 </a>

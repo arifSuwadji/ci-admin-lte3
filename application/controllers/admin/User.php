@@ -337,7 +337,7 @@ class User extends CI_Controller{
                 'nama_pengguna' => $data->nama_pengguna, 'email' => $data->email, 'nama_grup' => $data->nama_grup]);
         }
 
-        $filename=$title[0]." ".date("d-m-Y")." - eKta.xlsx";
+        $filename=$title[0]." ".date("d-m-Y")." - donasiKader.xlsx";
         $this->excelgenerator->generate($header, $content, $filename, 'pengguna');
     }
 
