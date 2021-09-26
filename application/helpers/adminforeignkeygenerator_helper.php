@@ -1727,10 +1727,21 @@ function template_foreignkey_pdf($controller, $table){
   <?php echo asset_plugin_css("tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css") ?>
   <?php echo asset_css("adminlte.min.css") ?>
   <style>
-  table, th, td {
-    border: 1px solid black;
-    padding: 4px;word-wrap:break-word;
-  }
+    table, td, th {
+        border: 1px solid black;
+    }
+
+    td, th {
+        padding-top: 10px;
+        padding-bottom: 5px;
+        padding-left: 3px;
+        padding-right: 3px;
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
   </style>
 </head>
 <body style="font-size:12px;">
