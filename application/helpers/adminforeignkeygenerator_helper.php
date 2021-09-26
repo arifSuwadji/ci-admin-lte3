@@ -1746,7 +1746,7 @@ function template_foreignkey_pdf($controller, $table){
 </head>
 <body style="font-size:12px;">
 	<div >
-        <div class="float-right">
+        <div class="float-right" style="text-align:right;">
             <br><?php if($menuHalaman){$title = explode("(",$menuHalaman->sub_judul_menu); } echo $title[0] ?>,  <?php echo dateText(date("d-m-Y")) ?>
         </div>
         <br>
