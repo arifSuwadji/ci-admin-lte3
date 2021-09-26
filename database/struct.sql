@@ -53,8 +53,8 @@ CREATE TABLE `pengguna` (
   `username` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
   `password` varchar(100) NOT NULL,
-  `tanggal_daftar` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `tanggal_kunjungan_akhir` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `tanggal_daftar` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `tanggal_kunjungan_akhir` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`pengguna_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;

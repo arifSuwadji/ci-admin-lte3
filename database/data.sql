@@ -71,7 +71,7 @@ INSERT INTO `halaman_menu` VALUES (24,'Pengguna','Excel - Data Pengguna','admin/
 -- Dumping data for table `pengguna`
 --
 
-INSERT INTO `pengguna` VALUES (1,1,'Admin Utama','admin','admin@admin.com','5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8','2020-02-12 09:56:09','0000-00-00 00:00:00');
+INSERT INTO `pengguna` VALUES (1,1,'Admin Utama','admin','admin@admin.com',sha1('admin'),NOW(),NOW());
 
 --
 -- Dumping data for table `pengguna_grup`
